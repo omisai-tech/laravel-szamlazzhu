@@ -95,10 +95,10 @@ abstract class AbstractResponse
                 throw new SzamlaAgentException(SzamlaAgentException::DOCUMENT_DATA_IS_MISSING);
             }
 
-            if (!empty($pdfData)) {
+            if (!empty($this->pdfFile)) {
                 if ($this->agent->isPdfFileSaveable()) {
                     $realPath = $this->getPdfFileName();
-                    $isSaved = Storage::disk('payment')->put($realPath, $pdfData);
+                    $isSaved = Storage::disk('payment')->put($realPath, $this->pdfFile);
 
                     if ($isSaved) {
                         Log::channel('szamlazzhu')->debug(SzamlaAgentException::PDF_FILE_SAVE_SUCCESS, ['path' => $realPath]);

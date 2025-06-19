@@ -75,7 +75,7 @@ class InvoiceResponse extends AbstractResponse
             $pdfFile = '';
         }
         if ($this->isPdfResponse($this->getData()['result']) && !empty($pdfFile)) {
-            $this->pdfFile = base64_decode($this->$pdfFile);
+            $this->pdfFile = base64_decode($pdfFile);
         }
 
         if (!$this->hasError()) {
