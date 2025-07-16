@@ -135,11 +135,11 @@ class SzamlaAgent
     private function sendRequest(SzamlaAgentRequest $request): AbstractResponse
     {
         $this->setRequest($request);
-        if (Proforma::class === $request->getEntity()::class) {
+        if ($request->getEntity() instanceof Proforma) {
             return new ProformaDeletionResponse($this, $request->send());
-        } elseif (Invoice::class === $request->getEntity()::class) {
+        } elseif ($request->getEntity() instanceof Invoice) {
             return new InvoiceResponse($this, $request->send());
-        } elseif (Receipt::class === $request->getEntity()::class) {
+        } elseif ($request->getEntity() instanceof Receipt) {
             return new ReceiptResponse($this, $request->send());
         }
 

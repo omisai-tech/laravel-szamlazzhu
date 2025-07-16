@@ -104,7 +104,7 @@ class InvoiceHeader extends DocumentHeader implements HasXmlBuildWithRequestInte
     /**
      * @throws SzamlaAgentException
      */
-    public function buildXmlData(SzamlaAgentRequest $request = null): array
+    public function buildXmlData(?SzamlaAgentRequest $request = null): array
     {
         if (empty($request)) {
             throw new SzamlaAgentException(SzamlaAgentException::XML_DATA_NOT_AVAILABLE);
