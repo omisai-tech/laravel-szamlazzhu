@@ -279,7 +279,7 @@ abstract class AbstractResponse
 
         $filename = SzamlaAgentUtil::getXmlFileName('response', $name . $postfix, $this->agent->getRequest()->getEntity());
         $realPath = sprintf('%s/response/%s', SzamlaAgent::XML_FILE_SAVE_PATH, $filename);
-        $isXmlSaved = Storage::disk('payment')->put($realPath, $xml->saveXML());
+        $isXmlSaved = Storage::disk(config('szamlazzhu.xml.disk'))->put($realPath, $xml->saveXML());
         if ($isXmlSaved) {
             Log::channel('szamlazzhu')->debug('XML file saved', ['path' => $realPath]);
         } else {

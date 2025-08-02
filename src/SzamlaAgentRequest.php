@@ -326,7 +326,10 @@ class SzamlaAgentRequest
     private function createXmlFile(\DOMDocument $xml): void
     {
         $realPath = sprintf('%s/request/%s/%s', SzamlaAgent::XML_FILE_SAVE_PATH, $this->getXmlDirectory(), $this->getFileName());
-        $isStored = Storage::disk('payment')->put($realPath, $xml->saveXML());
+        if (!empty(config('szamlazzhu.xml.path'))) {
+            $realPath = sprintf('%s/%s', config('szamlazzhu.xml.path'), $realPath);
+        }
+        $isStored = Storage::disk(config('szamlazzhu.xml.disk'))->put($realPath, $xml->saveXML());
         if ($isStored) {
             Log::channel('szamlazzhu')->debug('XML file saved', ['path' => $realPath]);
         } else {
@@ -453,11 +456,11 @@ class SzamlaAgentRequest
 
     public function getCertificationFile(): ?string
     {
-        return Storage::disk('payment')->get(self::CERTIFICATION_FILENAME);
+        return Storage::disk(config('szamlazzhu.certification.disk'))->get(self::CERTIFICATION_FILENAME);
     }
 
     public function hasCertificationFile(): bool
     {
-        return Storage::disk('payment')->exists(self::CERTIFICATION_FILENAME);
+        return Storage::disk(config('szamlazzhu.certification.disk'))->exists(self::CERTIFICATION_FILENAME);
     }
 }
