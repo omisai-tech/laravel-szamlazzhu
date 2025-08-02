@@ -74,6 +74,7 @@
             "@test:lint",
             "@test:analyse",
             "@test:unit"
-        ]
+        ],
+        "storage:link": "ln -sf ./vendor/orchestra/testbench-core/laravel/storage/app/private ./storage"
     }
 }

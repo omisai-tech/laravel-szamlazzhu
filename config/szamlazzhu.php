@@ -35,6 +35,8 @@ return [
 
     'pdf' => [
         'file_save' => env('SZAMLAZZHU_PDF_FILE_SAVE', false),
+        'disk' => env('SZAMLAZZHU_PDF_FILE_DISK', 'local'),
+        'path' => env('SZAMLAZZHU_PDF_FILE_PATH', storage_path('app/szamlazzhu')),
     ],
 
     /*
@@ -49,7 +51,7 @@ return [
 
     'log_email' => env('SZAMLAZZHU_LOG_EMAIL', null),
 
-   /*
+    /*
     |--------------------------------------------------------------------------
     | Számlázz.hu test
     |--------------------------------------------------------------------------

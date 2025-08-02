@@ -97,11 +97,12 @@ abstract class AbstractResponse
 
             if (!empty($this->pdfFile)) {
                 if ($this->agent->isPdfFileSaveable()) {
-                    $realPath = $this->getPdfFileName();
-                    $isSaved = Storage::disk('payment')->put($realPath, $this->pdfFile);
+                    $filename = $this->getPdfFileName();
+                    $isSaved = Storage::disk(config('szamlazzhu.pdf.disk'))
+                        ->put(sprintf('%s/%s', config('szamlazzhu.pdf.path'), $filename), $this->pdfFile);
 
                     if ($isSaved) {
-                        Log::channel('szamlazzhu')->debug(SzamlaAgentException::PDF_FILE_SAVE_SUCCESS, ['path' => $realPath]);
+                        Log::channel('szamlazzhu')->debug(SzamlaAgentException::PDF_FILE_SAVE_SUCCESS, ['path' => $filename]);
                     } else {
                         $errorMessage = SzamlaAgentException::PDF_FILE_SAVE_FAILED . ': ' . SzamlaAgentException::FILE_CREATION_FAILED;
                         Log::channel('szamlazzhu')->debug($errorMessage);
