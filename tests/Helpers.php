@@ -25,7 +25,6 @@ function makeInvoiceHeader($type = null)
     $header->setPaymentMethod(PaymentMethod::PAYMENT_METHOD_BANKCARD);
     $header->setCurrency(Currency::EUR);
     $header->setLanguage(Language::EN);
-    $header->setPrefix(config('szamlazzhu.test_prefix') ?? 'TEST');
     $header->setExchangeBank('MNB');
     $header->setPaid(true);
     return $header;
@@ -40,7 +39,6 @@ function makeProformaHeader()
     $header->setPaymentMethod(PaymentMethod::PAYMENT_METHOD_BANKCARD);
     $header->setCurrency(Currency::EUR);
     $header->setLanguage(Language::EN);
-    $header->setPrefix(config('szamlazzhu.test_prefix') ?? 'TEST');
     $header->setExchangeBank('MNB');
     $header->setPaid(true);
     return $header;
@@ -55,7 +53,6 @@ function makePrePaymentInvoiceHeader()
     $header->setPaymentMethod(PaymentMethod::PAYMENT_METHOD_BANKCARD);
     $header->setCurrency(Currency::EUR);
     $header->setLanguage(Language::EN);
-    $header->setPrefix(config('szamlazzhu.test_prefix') ?? 'TEST');
     $header->setExchangeBank('MNB');
     $header->setPaid(true);
     return $header;
@@ -67,7 +64,6 @@ function makeReceiptHeader()
     $header->setPaymentMethod(PaymentMethod::PAYMENT_METHOD_BANKCARD);
     $header->setCurrency(Currency::EUR);
     $header->setExchangeBank('MNB');
-    $header->setPrefix(config('szamlazzhu.test_prefix') ?? 'TEST');
     return $header;
 }
 
