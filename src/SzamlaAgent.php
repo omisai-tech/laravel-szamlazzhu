@@ -662,6 +662,11 @@ class SzamlaAgent
         $this->isResponseXmlFileSaveable = $isResponseXmlFileSaveable;
     }
 
+    public function setPdfFileSaveable(bool $isPdfFileSaveable): void
+    {
+        $this->isPdfFileSaveable = $isPdfFileSaveable;
+    }
+
     /**
      * @return Document|object
      */

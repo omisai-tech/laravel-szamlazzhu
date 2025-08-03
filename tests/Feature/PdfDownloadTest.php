@@ -46,6 +46,8 @@ it('can delete file', function () {
 
 it('can download proforma invoice PDF', function () {
     $agent = SzamlaAgent::createWithAPIkey(config('szamlazzhu.api_key'), true);
+    $agent->setDownloadPdf(true);
+    $agent->setPdfFileSaveable(true);
     $invoiceHeader = makeProformaHeader();
     $seller = makeSeller();
     $buyer = makeBuyer('Proforma Doe', 'Test street 11.');
