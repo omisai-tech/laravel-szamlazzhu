@@ -52,11 +52,15 @@ class SzamlaAgent
 
     private CookieHandler $cookieHandler;
 
-    protected function __construct(?string $username, ?string $password, ?string $apiKey, bool $downloadPdf, int $responseType = AbstractResponse::RESULT_AS_XML, string $aggregator = '')
+    protected function __construct(?string $username, ?string $password, ?string $apiKey, ?bool $downloadPdf, int $responseType = AbstractResponse::RESULT_AS_XML, string $aggregator = '')
     {
         $this->setting = new SzamlaAgentSetting($username, $password, $apiKey, $downloadPdf, SzamlaAgentSetting::DOWNLOAD_COPIES_COUNT, $responseType, $aggregator);
         $this->cookieHandler = new CookieHandler();
         Log::channel('szamlazzhu')->debug(sprintf('Számla Agent initialization is complete ($username: %s, apiKey: %s)', $username, $apiKey));
+
+        if (null === $downloadPdf) {
+            $downloadPdf = config('szamlazzhu.pdf.file_save', false);
+        }
 
         $this->isPdfFileSaveable = $downloadPdf;
         $this->isXmlFileSaveable = config('szamlazzhu.xml.file_save', false);
@@ -87,7 +91,7 @@ class SzamlaAgent
     /**
      * API key is the recommended authentication mode
      */
-    public static function createWithAPIkey(string $apiKey, bool $downloadPdf = true, int $responseType = AbstractResponse::RESULT_AS_XML, string $aggregator = '')
+    public static function createWithAPIkey(string $apiKey, ?bool $downloadPdf = null, int $responseType = AbstractResponse::RESULT_AS_XML, string $aggregator = '')
     {
         $index = self::getHash($apiKey);
 
@@ -135,11 +139,16 @@ class SzamlaAgent
     private function sendRequest(SzamlaAgentRequest $request): AbstractResponse
     {
         $this->setRequest($request);
-        if ($request->getEntity() instanceof Proforma) {
-            return new ProformaDeletionResponse($this, $request->send());
-        } elseif ($request->getEntity() instanceof Invoice) {
+        $entity = $request->getEntity();
+        if ($entity instanceof Proforma) {
+            if ($request->getType() === 'deleteProforma') {
+                return new ProformaDeletionResponse($this, $request->send());
+            }
+
             return new InvoiceResponse($this, $request->send());
-        } elseif ($request->getEntity() instanceof Receipt) {
+        } elseif ($entity instanceof Invoice) {
+            return new InvoiceResponse($this, $request->send());
+        } elseif ($entity instanceof Receipt) {
             return new ReceiptResponse($this, $request->send());
         }
 
@@ -651,6 +660,11 @@ class SzamlaAgent
     public function setResponseXmlFileSave(bool $isResponseXmlFileSaveable): void
     {
         $this->isResponseXmlFileSaveable = $isResponseXmlFileSaveable;
+    }
+
+    public function setPdfFileSaveable(bool $isPdfFileSaveable): void
+    {
+        $this->isPdfFileSaveable = $isPdfFileSaveable;
     }
 
     /**

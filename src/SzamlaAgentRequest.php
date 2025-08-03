@@ -172,7 +172,7 @@ class SzamlaAgentRequest
         try {
             $result = SzamlaAgentUtil::checkValidXml($xml->saveXML());
             if (!empty($result)) {
-                throw new SzamlaAgentException(SzamlaAgentException::XML_NOT_VALID." a {$result[0]->line}. sorban: {$result[0]->message}. ");
+                throw new SzamlaAgentException(SzamlaAgentException::XML_NOT_VALID . " a {$result[0]->line}. sorban: {$result[0]->message}. ");
             }
             $formatXml = SzamlaAgentUtil::formatXml($xml);
             $this->setXmlString($formatXml->saveXML());
@@ -189,7 +189,7 @@ class SzamlaAgentRequest
                 }
             } catch (\Exception $ex) {
                 Log::channel('szamlazzhu')->debug('XML', ['data' => print_r($xmlString, true)]);
-                throw new SzamlaAgentException(SzamlaAgentException::XML_DATA_BUILD_FAILED.":  {$e->getMessage()} ");
+                throw new SzamlaAgentException(SzamlaAgentException::XML_DATA_BUILD_FAILED . ":  {$e->getMessage()} ");
             }
         }
     }
@@ -326,7 +326,10 @@ class SzamlaAgentRequest
     private function createXmlFile(\DOMDocument $xml): void
     {
         $realPath = sprintf('%s/request/%s/%s', SzamlaAgent::XML_FILE_SAVE_PATH, $this->getXmlDirectory(), $this->getFileName());
-        $isStored = Storage::disk('payment')->put($realPath, $xml->saveXML());
+        if (!empty(config('szamlazzhu.xml.path'))) {
+            $realPath = sprintf('%s/%s', config('szamlazzhu.xml.path'), $realPath);
+        }
+        $isStored = Storage::disk(config('szamlazzhu.xml.disk'))->put($realPath, $xml->saveXML());
         if ($isStored) {
             Log::channel('szamlazzhu')->debug('XML file saved', ['path' => $realPath]);
         } else {
@@ -342,7 +345,7 @@ class SzamlaAgentRequest
      */
     private function makeHttpRequest(): Response
     {
-         $client = Http::timeout($this->getRequestTimeout())
+        $client = Http::timeout($this->getRequestTimeout())
             ->withCookies(...$this->cookieHandler->getCookies())
             ->attach(
                 $this->getFieldName(),
@@ -364,7 +367,7 @@ class SzamlaAgentRequest
                 if (self::MAX_NUMBER_OF_ATTACHMENTS < ($key + 1)) {
                     break;
                 }
-                $client = $client->attach('attachfile'. $key, $attachment['content'], $attachment['name']);
+                $client = $client->attach('attachfile' . $key, $attachment['content'], $attachment['name']);
             }
         }
 
@@ -376,7 +379,7 @@ class SzamlaAgentRequest
         return $this->agent;
     }
 
-    private function getType(): string
+    public function getType(): string
     {
         return $this->type;
     }
@@ -453,11 +456,11 @@ class SzamlaAgentRequest
 
     public function getCertificationFile(): ?string
     {
-        return Storage::disk('payment')->get(self::CERTIFICATION_FILENAME);
+        return Storage::disk(config('szamlazzhu.certification.disk'))->get(self::CERTIFICATION_FILENAME);
     }
 
     public function hasCertificationFile(): bool
     {
-        return Storage::disk('payment')->exists(self::CERTIFICATION_FILENAME);
+        return Storage::disk(config('szamlazzhu.certification.disk'))->exists(self::CERTIFICATION_FILENAME);
     }
 }

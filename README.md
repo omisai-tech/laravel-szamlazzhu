@@ -35,9 +35,18 @@ or in config/szamlazzhu.php file:
 
 ## Usage
 
-WIP
+For comprehensive usage examples and detailed documentation, please see [USAGE.md](USAGE.md).
 
-***Note:*** For detailed usage examples and the most recent updates, please check the test cases or read through the source code.
+This guide covers:
+- Installation & Configuration
+- Creating Invoices (regular, pre-payment, final, corrective, reverse)
+- Creating Receipts
+- Creating Proforma Invoices
+- Working with Waybills (MPL, Sprinter, Transoflex, PPP)
+- Advanced features (multi-currency, ledger data, attachments)
+- Error handling and best practices
+
+***Note:*** For the most recent updates, please check the test cases or read through the source code.
 
 ## Changelog
 

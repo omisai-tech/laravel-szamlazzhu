@@ -23,18 +23,64 @@ return [
     |
     */
 
+    'certificate' => [
+        'disk' => env('SZAMLAZZHU_CERTIFICATE_DISK', 'local'),
+
+        'file' => env('SZAMLAZZHU_CERTIFICATE_FILE', null),
+        'password' => env('SZAMLAZZHU_CERTIFICATE_PASSWORD', null),
+    ],
+
+    'cookie' => [
+        'disk' => env('SZAMLAZZHU_COOKIE_DISK', 'local'),
+    ],
+
     'xml' => [
         /*
          *  Enable/Disable both XML save option
          */
         'file_save' => env('SZAMLAZZHU_XML_FILE_SAVE', false),
 
+        'disk' => env('SZAMLAZZHU_XML_FILE_DISK', 'local'),
+
+        'path' => env('SZAMLAZZHU_XML_FILE_PATH', storage_path('app/szamlazzhu')),
+
         'request_file_save' => env('SZAMLAZZHU_XML_REQUEST_FILE_SAVE', false),
+
         'response_file_save' => env('SZAMLAZZHU_XML_RESPONSE_FILE_SAVE', false),
     ],
 
     'pdf' => [
         'file_save' => env('SZAMLAZZHU_PDF_FILE_SAVE', false),
+
+        'disk' => env('SZAMLAZZHU_PDF_FILE_DISK', 'local'),
+
+        'path' => env('SZAMLAZZHU_PDF_FILE_PATH', storage_path('app/szamlazzhu')),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Invoice configuration
+    |--------------------------------------------------------------------------
+    |
+    | This configuration is used to set the default values for invoices.
+    |
+    */
+
+    'invoice' => [
+        'prefix' => env('SZAMLAZZHU_INVOICE_PREFIX', ''),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Receipt configuration
+    |--------------------------------------------------------------------------
+    |
+    | This configuration is used to set the default values for receipts.
+    |
+    */
+
+    'receipt' => [
+        'prefix' => env('SZAMLAZZHU_RECEIPT_PREFIX', ''),
     ],
 
     /*
@@ -48,16 +94,4 @@ return [
     */
 
     'log_email' => env('SZAMLAZZHU_LOG_EMAIL', null),
-
-   /*
-    |--------------------------------------------------------------------------
-    | Számlázz.hu test
-    |--------------------------------------------------------------------------
-    |
-    |  Configuration for test purposes.
-    |
-    */
-
-    'test_prefix' => env('SZAMLAZZHU_TEST_PREFIX', null),
-
 ];

@@ -58,12 +58,12 @@ class CookieHandler
             throw new SzamlaAgentException('The Cookie handle mode is "database", please override the CookeHandler::getCookieFile() method with your custom handler.');
         }
 
-        if (!Storage::disk('payment')->exists(self::COOKIE_FILE_PATH)) {
+        if (!Storage::disk(config('szamlazzhu.cookie.disk'))->exists(self::COOKIE_FILE_PATH)) {
             Log::channel('szamlazzhu')->debug('Cookie file does not exists, creating an empty one.');
-            Storage::disk('payment')->put(self::COOKIE_FILE_PATH, '');
+            Storage::disk(config('szamlazzhu.cookie.disk'))->put(self::COOKIE_FILE_PATH, '');
         }
 
-        return Storage::disk('payment')->get(self::COOKIE_FILE_PATH);
+        return Storage::disk(config('szamlazzhu.cookie.disk'))->get(self::COOKIE_FILE_PATH);
     }
 
     public function setCookieFile(Response $response)
@@ -80,13 +80,13 @@ class CookieHandler
             'receivedCookie' => $receivedCookie,
         ]);
 
-        if (Storage::disk('payment')->exists(self::COOKIE_FILE_PATH)) {
-            $storedCookie = Storage::disk('payment')->get(self::COOKIE_FILE_PATH);
+        if (Storage::disk(config('szamlazzhu.cookie.disk'))->exists(self::COOKIE_FILE_PATH)) {
+            $storedCookie = Storage::disk(config('szamlazzhu.cookie.disk'))->get(self::COOKIE_FILE_PATH);
             if ($storedCookie !== $receivedCookie) {
-                Storage::disk('payment')->put(self::COOKIE_FILE_PATH, $receivedCookie);
+                Storage::disk(config('szamlazzhu.cookie.disk'))->put(self::COOKIE_FILE_PATH, $receivedCookie);
             }
         } else {
-            Storage::disk('payment')->put(self::COOKIE_FILE_PATH, $receivedCookie);
+            Storage::disk(config('szamlazzhu.cookie.disk'))->put(self::COOKIE_FILE_PATH, $receivedCookie);
         }
     }
 }

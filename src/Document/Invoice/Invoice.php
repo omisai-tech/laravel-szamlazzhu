@@ -224,7 +224,7 @@ class Invoice extends Document implements HasXmlBuildWithRequestInterface
                 $data = $settings['beallitasok'];
                 break;
             default:
-                throw new SzamlaAgentException(SzamlaAgentException::XML_SCHEMA_TYPE_NOT_EXISTS.": {$request->getXmlName()}.");
+                throw new SzamlaAgentException(SzamlaAgentException::XML_SCHEMA_TYPE_NOT_EXISTS . ": {$request->getXmlName()}.");
         }
 
         return $data;
@@ -241,25 +241,25 @@ class Invoice extends Document implements HasXmlBuildWithRequestInterface
             foreach ($fields as $key) {
                 switch ($key) {
                     case 'beallitasok':
-                         $value = $request->getAgent()->getSetting()->buildXmlData($request);
-                    break;
+                        $value = $request->getAgent()->getSetting()->buildXmlData($request);
+                        break;
                     case 'fejlec':
                         $value = $this->header->buildXmlData($request);
-                    break;
+                        break;
                     case 'tetelek':
                         $value = $this->buildXmlItemsData();
-                    break;
+                        break;
                     case 'elado':
                         $value = (!empty($this->seller)) ? $this->seller->buildXmlData($request) : [];
-                    break;
+                        break;
                     case 'vevo':
                         $value = (!empty($this->buyer)) ? $this->buyer->buildXmlData($request) : [];
-                    break;
+                        break;
                     case 'fuvarlevel':
                         $value = (!empty($this->waybill)) ? $this->waybill->buildXmlData($request) : [];
-                    break;
+                        break;
                     default:
-                        throw new SzamlaAgentException(SzamlaAgentException::XML_KEY_NOT_EXISTS.": {$key}");
+                        throw new SzamlaAgentException(SzamlaAgentException::XML_KEY_NOT_EXISTS . ": {$key}");
                 }
 
                 if (isset($value)) {
@@ -348,16 +348,16 @@ class Invoice extends Document implements HasXmlBuildWithRequestInterface
             return $this;
         }
 
-        if (!Storage::disk('payment')->exists($filePath) && !Storage::exists($filePath)) {
+        if (!Storage::disk(config('szamlazzhu.invoice.disk'))->exists($filePath) && !Storage::exists($filePath)) {
             Log::channel('szamlazzhu')->error('Attached file does not exists', ['file_path' => $filePath]);
 
             return $this;
         }
 
-        if (Storage::disk('payment')->exists($filePath)) {
-            $fileContent = Storage::disk('payment')->exists($filePath);
+        if (Storage::disk(config('szamlazzhu.invoice.disk'))->exists($filePath)) {
+            $fileContent = Storage::disk(config('szamlazzhu.invoice.disk'))->exists($filePath);
         } elseif (Storage::exists($filePath)) {
-            $fileContent = Storage::disk('payment')->exists($filePath);
+            $fileContent = Storage::disk(config('szamlazzhu.invoice.disk'))->exists($filePath);
         }
 
         $this->attachments[] = [

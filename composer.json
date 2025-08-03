@@ -66,14 +66,15 @@
         "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
         "lint": "pint",
         "test:lint": "pint --test",
-        "test:analyse": "vendor/bin/phpstan analyse src tests",
-        "test:unit": "vendor/bin/pest --colors=always",
-        "test:coverage": "vendor/bin/pest --coverage",
+        "test:analyse": "./vendor/bin/phpstan analyse src tests",
+        "test:unit": "./vendor/bin/pest --colors=always",
+        "test:coverage": "./vendor/bin/pest --coverage",
         "test:insights": "./vendor/bin/phpinsights",
         "test": [
             "@test:lint",
             "@test:analyse",
             "@test:unit"
-        ]
+        ],
+        "storage:link": "ln -sf ./vendor/orchestra/testbench-core/laravel/storage/app/private ./storage"
     }
 }

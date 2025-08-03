@@ -17,6 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
+      max-parallel: 1
       matrix:
         php: [8.1, 8.2, 8.3, 8.4]
         laravel: [9.*, 10.*, 11.*, 12.*]
@@ -38,7 +39,10 @@ jobs:
       APP_KEY: ${{ secrets.APP_KEY }}
       APP_DEBUG: true
       SZAMLAZZHU_API_KEY: ${{ secrets.SZAMLAZZHU_API_KEY }}
-      SZAMLAZZHU_TEST_PREFIX: ${{ secrets.SZAMLAZZHU_TEST_PREFIX }}
+      SZAMLAZZHU_INVOICE_PREFIX: ${{ secrets.SZAMLAZZHU_INVOICE_PREFIX }}
+      SZAMLAZZHU_RECEIPT_PREFIX: ${{ secrets.SZAMLAZZHU_RECEIPT_PREFIX }}
+      SZAMLAZZHU_PDF_FILE_SAVE: true
+
     steps:
       - uses: actions/checkout@v4
 
