@@ -20,6 +20,7 @@ All notable changes to `laravel-szamlazzhu` will be documented in this file.
 ### Changed
 * update storage disk references to use configuration settings for cookie, invoice, and XML file handling
 * change SzamlaAgentRequest's type visibility to public
+* SzamlaAgent::createWithAPIkey does not require 2nd parameter anymore ($downloadPdf), the fallback is "szamlazzhu.pdf.file_save" config or false
 
 ## [1.4.0](https://github.com/omisai-tech/laravel-szamlazzhu/compare/1.3.0...1.4.0) - 2025-02-06
 
