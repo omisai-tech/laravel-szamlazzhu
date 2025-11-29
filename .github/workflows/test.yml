@@ -20,7 +20,7 @@ jobs:
             max-parallel: 1
             matrix:
                 php: [8.2, 8.3, 8.4, 8.5]
-                laravel: [9.*, 10.*, 11.*, 12.*]
+                laravel: [10.*, 11.*, 12.*]
                 dependency-version: [prefer-stable]
         name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }} - ${{ matrix.dependency-version }}
         env:
