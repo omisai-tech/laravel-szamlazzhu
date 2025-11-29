@@ -9,6 +9,7 @@ All notable changes to `laravel-szamlazzhu` will be documented in this file.
 * Update VAT handling in InvoiceItem and ReceiptItem classes using SzamlaAgentUtil
 * Remove deprecated VAT_TEHK constant from Item class
 * Update PHP version requirement to 8.2
+* Drop Laravel 9 version support
 * Add Laravel 12 version support
 * Update getXmlFileName method to include SzamlaAgent parameter and update filename generation
 
