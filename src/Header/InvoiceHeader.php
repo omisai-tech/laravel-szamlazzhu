@@ -85,26 +85,20 @@ class InvoiceHeader extends DocumentHeader implements HasXmlBuildWithRequestInte
     public function setDefaultData(int $type)
     {
         $this->setType(Type::INVOICE);
-
         $this->setInvoiceType($type);
-
+        $this->setPrefix(config('szamlazzhu.invoice.prefix'));
         $this->setIssueDate(Carbon::now());
-
         $this->setPaymentMethod(PaymentMethod::PAYMENT_METHOD_TRANSFER);
-
         $this->setCurrency(Document::getDefaultCurrency());
-
         $this->setLanguage(Document::getDefaultLanguage());
-
         $this->setFulfillment(Carbon::now());
-
         $this->setPaymentDue(Carbon::now()->addDays(SzamlaAgentUtil::DEFAULT_ADDED_DAYS));
     }
 
     /**
      * @throws SzamlaAgentException
      */
-    public function buildXmlData(SzamlaAgentRequest $request = null): array
+    public function buildXmlData(?SzamlaAgentRequest $request = null): array
     {
         if (empty($request)) {
             throw new SzamlaAgentException(SzamlaAgentException::XML_DATA_NOT_AVAILABLE);

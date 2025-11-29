@@ -1,0 +1,63 @@
+name: Run Test Suite
+on:
+  push:
+    branches: ["master"]
+    paths-ignore:
+      - "**.md"
+      - ".github/**"
+  pull_request:
+    branches: ["master"]
+    paths-ignore:
+      - "**.md"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        php: [8.1, 8.2, 8.3, 8.4]
+        laravel: [9.*, 10.*, 11.*, 12.*]
+        dependency-version: [prefer-lowest, prefer-stable]
+        exclude:
+          - laravel: "12.*"
+            php: 8.1
+          - laravel: "12.*"
+            php: 8.0
+          - laravel: "11.*"
+            php: 8.1
+          - laravel: "11.*"
+            php: 8.0
+          - laravel: "10.*"
+            php: 8.0
+    name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }} - ${{ matrix.dependency-version }}
+    env:
+      APP_NAME: Test
+      APP_KEY: ${{ secrets.APP_KEY }}
+      APP_DEBUG: true
+      SZAMLAZZHU_API_KEY: ${{ secrets.SZAMLAZZHU_API_KEY }}
+      SZAMLAZZHU_INVOICE_PREFIX: ${{ secrets.SZAMLAZZHU_INVOICE_PREFIX }}
+      SZAMLAZZHU_RECEIPT_PREFIX: ${{ secrets.SZAMLAZZHU_RECEIPT_PREFIX }}
+      SZAMLAZZHU_PDF_FILE_SAVE: true
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite
+          coverage: none
+
+      - name: Install dependencies
+        run: |
+          composer install --prefer-dist --no-interaction
+          composer require "laravel/framework:${{ matrix.laravel }}" --no-interaction --no-update
+          composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction
+
+      - name: Execute tests
+        run: composer run test:unit

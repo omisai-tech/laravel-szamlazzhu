@@ -14,14 +14,14 @@ class SzamlaAgentServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__.'/../config/szamlazzhu.php',
+            __DIR__ . '/../config/szamlazzhu.php',
             'szamlazzhu'
         );
 
         $this->app->extend('config', function ($config) {
             $config['filesystems.disks.payment'] = [
                 'driver' => 'local',
-                'root' => storage_path('app/payment'),
+                'root' => storage_path('app/szamlazzhu'),
                 'throw' => false,
                 'visibility' => 'private',
                 'directory_visibility' => 'private',
@@ -40,8 +40,6 @@ class SzamlaAgentServiceProvider extends ServiceProvider
 
             return $config;
         });
-
-
     }
 
     protected function offerPublishing(): void
@@ -56,7 +54,7 @@ class SzamlaAgentServiceProvider extends ServiceProvider
         }
 
         $this->publishes([
-            __DIR__.'/../config/szamlazzhu.php' => config_path('szamlazzhu.php'),
+            __DIR__ . '/../config/szamlazzhu.php' => config_path('szamlazzhu.php'),
         ], 'szamlazzhu-config');
     }
 }

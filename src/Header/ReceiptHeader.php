@@ -27,6 +27,7 @@ class ReceiptHeader extends DocumentHeader implements HasXmlBuildWithRequestInte
     public function __construct(string $receiptNumber = '')
     {
         $this->setType(Type::RECEIPT);
+        $this->setPrefix(config('szamlazzhu.receipt.prefix'));
         $this->setReceiptNumber($receiptNumber);
         $this->setPaymentMethod(PaymentMethod::PAYMENT_METHOD_CASH);
         $this->setCurrency(Document::getDefaultCurrency());
@@ -46,7 +47,15 @@ class ReceiptHeader extends DocumentHeader implements HasXmlBuildWithRequestInte
         switch ($request->getXmlName()) {
             case $request::XML_SCHEMA_CREATE_RECEIPT:
                 $data = $this->buildFieldsData($request, [
-                    'hivasAzonosito', 'elotag', 'fizmod', 'penznem', 'devizabank', 'devizaarf', 'megjegyzes', 'pdfSablon', 'fokonyvVevo',
+                    'hivasAzonosito',
+                    'elotag',
+                    'fizmod',
+                    'penznem',
+                    'devizabank',
+                    'devizaarf',
+                    'megjegyzes',
+                    'pdfSablon',
+                    'fokonyvVevo',
                 ]);
                 break;
             case $request::XML_SCHEMA_CREATE_REVERSE_RECEIPT:
@@ -59,7 +68,7 @@ class ReceiptHeader extends DocumentHeader implements HasXmlBuildWithRequestInte
                 $data = $this->buildFieldsData($request, ['nyugtaszam']);
                 break;
             default:
-                throw new SzamlaAgentException(SzamlaAgentException::XML_SCHEMA_TYPE_NOT_EXISTS.": {$request->getXmlName()}");
+                throw new SzamlaAgentException(SzamlaAgentException::XML_SCHEMA_TYPE_NOT_EXISTS . ": {$request->getXmlName()}");
         }
 
         return $data;
@@ -79,37 +88,37 @@ class ReceiptHeader extends DocumentHeader implements HasXmlBuildWithRequestInte
         foreach ($fields as $key) {
             switch ($key) {
                 case 'hivasAzonosito':
-                    $value = !empty($this->callId) ? $this->callId: null;
-                break;
+                    $value = !empty($this->callId) ? $this->callId : null;
+                    break;
                 case 'elotag':
                     $value = $this->prefix;
-                break;
+                    break;
                 case 'fizmod':
                     $value = $this->getPaymentMethod();
-                break;
+                    break;
                 case 'penznem':
                     $value = $this->getCurrency();
-                break;
+                    break;
                 case 'devizabank':
                     $value = (!empty($this->exchangeBank)) ? $this->exchangeBank : null;
-                break;
+                    break;
                 case 'devizaarf':
                     $value = (!empty($this->exchangeRate)) ? $this->exchangeRate : null;
-                break;
+                    break;
                 case 'megjegyzes':
                     $value = (!empty($this->comment)) ? $this->comment : null;
-                break;
+                    break;
                 case 'pdfSablon':
                     $value = (!empty($this->pdfTemplate)) ? $this->pdfTemplate : null;
-                break;
+                    break;
                 case 'fokonyvVevo':
                     $value = (!empty($this->buyerLedgerId)) ? $this->buyerLedgerId : null;
-                break;
+                    break;
                 case 'nyugtaszam':
                     $value = $this->receiptNumber;
-                break;
+                    break;
                 default:
-                    throw new SzamlaAgentException(SzamlaAgentException::XML_KEY_NOT_EXISTS.": {$key}");
+                    throw new SzamlaAgentException(SzamlaAgentException::XML_KEY_NOT_EXISTS . ": {$key}");
             }
 
             if (isset($value)) {

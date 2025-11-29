@@ -21,7 +21,7 @@ class ProformaHeader extends InvoiceHeader
     /**
      * @throws SzamlaAgentException
      */
-    public function buildXmlData(SzamlaAgentRequest $request): array
+    public function buildXmlData(?SzamlaAgentRequest $request = null): array
     {
         if (empty($request)) {
             throw new SzamlaAgentException(SzamlaAgentException::XML_DATA_NOT_AVAILABLE);

@@ -95,13 +95,14 @@ abstract class AbstractResponse
                 throw new SzamlaAgentException(SzamlaAgentException::DOCUMENT_DATA_IS_MISSING);
             }
 
-            if (!empty($pdfData)) {
+            if (!empty($this->pdfFile)) {
                 if ($this->agent->isPdfFileSaveable()) {
-                    $realPath = $this->getPdfFileName();
-                    $isSaved = Storage::disk('payment')->put($realPath, $pdfData);
+                    $filename = $this->getPdfFileName();
+                    $isSaved = Storage::disk(config('szamlazzhu.pdf.disk'))
+                        ->put(sprintf('%s/%s', config('szamlazzhu.pdf.path'), $filename), $this->pdfFile);
 
                     if ($isSaved) {
-                        Log::channel('szamlazzhu')->debug(SzamlaAgentException::PDF_FILE_SAVE_SUCCESS, ['path' => $realPath]);
+                        Log::channel('szamlazzhu')->debug(SzamlaAgentException::PDF_FILE_SAVE_SUCCESS, ['path' => $filename]);
                     } else {
                         $errorMessage = SzamlaAgentException::PDF_FILE_SAVE_FAILED . ': ' . SzamlaAgentException::FILE_CREATION_FAILED;
                         Log::channel('szamlazzhu')->debug($errorMessage);
@@ -278,7 +279,7 @@ abstract class AbstractResponse
 
         $filename = SzamlaAgentUtil::getXmlFileName('response', $name . $postfix, $this->agent, $this->agent->getRequest()->getEntity());
         $realPath = sprintf('%s/response/%s', SzamlaAgent::XML_FILE_SAVE_PATH, $filename);
-        $isXmlSaved = Storage::disk('payment')->put($realPath, $xml->saveXML());
+        $isXmlSaved = Storage::disk(config('szamlazzhu.xml.disk'))->put($realPath, $xml->saveXML());
         if ($isXmlSaved) {
             Log::channel('szamlazzhu')->debug('XML file saved', ['path' => $realPath]);
         } else {

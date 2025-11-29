@@ -4,6 +4,7 @@
 ![Számlázz.hu API](https://img.shields.io/badge/Számlázz.hu%20API-2.10.23-yellow?style=for-the-badge)
 ![Laravel](https://img.shields.io/badge/Laravel-9%2C10%2C11%2C12-red?style=for-the-badge&logo=laravel)
 
+
 ## About
 
 **laravel-szamlazzhu** is a Laravel package that provides an easy-to-use interface for communicating with the Számlázz.hu API. It was created by refactoring the original source code (available at [here](https://docs.szamlazz.hu/php)) and integrating it into the [Laravel framework](https://laravel.com/).
@@ -35,7 +36,18 @@ or in config/szamlazzhu.php file:
 
 ## Usage
 
-WIP
+For comprehensive usage examples and detailed documentation, please see [USAGE.md](USAGE.md).
+
+This guide covers:
+- Installation & Configuration
+- Creating Invoices (regular, pre-payment, final, corrective, reverse)
+- Creating Receipts
+- Creating Proforma Invoices
+- Working with Waybills (MPL, Sprinter, Transoflex, PPP)
+- Advanced features (multi-currency, ledger data, attachments)
+- Error handling and best practices
+
+***Note:*** For the most recent updates, please check the test cases or read through the source code.
 
 ## Changelog
 
