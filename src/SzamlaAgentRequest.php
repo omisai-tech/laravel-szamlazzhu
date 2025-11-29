@@ -162,7 +162,7 @@ class SzamlaAgentRequest
     {
         $agent = $this->agent;
         $this->setXmlFileData($this->getType());
-        $this->setFileName(SzamlaAgentUtil::getXmlFileName('request', $this->getXmlName(), $this->getEntity()));
+        $this->setFileName(SzamlaAgentUtil::getXmlFileName('request', $this->getXmlName(), $agent, $this->getEntity()));
 
         Log::channel('szamlazzhu')->debug('Started to build the XML data.');
         $xmlArray = $this->getEntity()->buildXmlData($this);

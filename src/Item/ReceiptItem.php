@@ -5,6 +5,7 @@ namespace Omisai\Szamlazzhu\Item;
 use Omisai\Szamlazzhu\HasXmlBuildInterface;
 use Omisai\Szamlazzhu\Ledger\ReceiptItemLedger;
 use Omisai\Szamlazzhu\SzamlaAgentException;
+use Omisai\Szamlazzhu\SzamlaAgentUtil;
 
 class ReceiptItem extends Item implements HasXmlBuildInterface
 {
@@ -27,7 +28,7 @@ class ReceiptItem extends Item implements HasXmlBuildInterface
         $data['mennyiseg'] = number_format($this->quantity, 2);
         $data['mennyisegiEgyseg'] = $this->quantityUnit;
         $data['nettoEgysegar'] = $this->netUnitPrice;
-        $data['afakulcs'] = $this->vat;
+        $data['afakulcs'] = SzamlaAgentUtil::dotCheck($this->vat);
         $data['netto'] = number_format($this->netPrice, 2);
         $data['afa'] = number_format($this->vatAmount, 2);
         $data['brutto'] = number_format($this->grossAmount, 2);

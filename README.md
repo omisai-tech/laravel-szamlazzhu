@@ -1,8 +1,9 @@
 [![Latest Stable Version](https://img.shields.io/packagist/v/omisai/laravel-szamlazzhu?style=for-the-badge)](https://packagist.org/packages/omisai/laravel-szamlazzhu)
 [![License](https://img.shields.io/packagist/l/omisai/laravel-szamlazzhu?style=for-the-badge)](https://packagist.org/packages/omisai/laravel-szamlazzhu)
-[![PHP Version Require](https://img.shields.io/packagist/dependency-v/omisai/laravel-szamlazzhu/php?style=for-the-badge)](https://packagist.org/packages/omisai/laravel-szamlazzhu)
-![Laravel](https://img.shields.io/badge/Laravel-%5E9.0-red?style=for-the-badge&logo=laravel)
-![Számlázz.hu API](https://img.shields.io/badge/Számlázz.hu%20API-2.10.20-yellow?style=for-the-badge)
+[![PHP Version Require](https://img.shields.io/badge/PHP-%3E%3D8.2-blue?style=for-the-badge&logo=php)](https://packagist.org/packages/omisai/laravel-szamlazzhu)
+![Számlázz.hu API](https://img.shields.io/badge/Számlázz.hu%20API-2.10.23-yellow?style=for-the-badge)
+![Laravel](https://img.shields.io/badge/Laravel-10%2C11%2C12-red?style=for-the-badge&logo=laravel)
+
 
 ## About
 
