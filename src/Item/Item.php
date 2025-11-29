@@ -54,11 +54,6 @@ class Item
     public const VAT_TAHK = 'TAHK';
 
     /**
-     * HU: Áfakulcs: áfakörön kívüli
-     */
-    public const VAT_TEHK = 'TEHK';
-
-    /**
      * HU: Áfakulcs: EU-n belüli termék értékesítés
      */
     public const VAT_EUT = 'EUT';
