@@ -52,6 +52,8 @@ class SzamlaAgent
 
     private CookieHandler $cookieHandler;
 
+    private bool $singleton = true;
+
     protected function __construct(?string $username, ?string $password, ?string $apiKey, bool $downloadPdf, int $responseType = AbstractResponse::RESULT_AS_XML, string $aggregator = '')
     {
         $this->setting = new SzamlaAgentSetting($username, $password, $apiKey, $downloadPdf, SzamlaAgentSetting::DOWNLOAD_COPIES_COUNT, $responseType, $aggregator);
@@ -701,5 +703,15 @@ class SzamlaAgent
     public function getCookieHandler(): CookieHandler
     {
         return $this->cookieHandler;
+    }
+
+    public function getSingleton(): bool
+    {
+        return $this->singleton;
+    }
+
+    protected function setSingleton(bool $singleton): void
+    {
+        $this->singleton = $singleton;
     }
 }

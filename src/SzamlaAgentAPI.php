@@ -14,26 +14,29 @@ class SzamlaAgentAPI extends SzamlaAgent
      *
      * @param  string  $apiKey       Számla Agent kulcs
      * @param  bool  $downloadPdf  szeretnénk-e letölteni a bizonylatot PDF formátumban
-     * @param  int  $logLevel     naplózási szint
      * @param  int  $responseType válasz típusa (szöveges vagy XML)
      * @param  string  $aggregator   webáruházat futtató motor neve
+     * @param  bool  $singleton    singleton minta használata
      * @return SzamlaAgent
      *
      * @throws SzamlaAgentException
      */
-    public static function create(string $apiKey, bool $downloadPdf = true, int $responseType = SzamlaAgentResponse::RESULT_AS_TEXT, string $aggregator = '')
+    public static function create(string $apiKey, bool $downloadPdf = true, int $responseType = SzamlaAgentResponse::RESULT_AS_TEXT, string $aggregator = '', $singleton = true)
     {
-        $index = self::getHash($apiKey);
-
         $agent = null;
-        if (isset(self::$agents[$index])) {
-            $agent = self::$agents[$index];
-        }
 
-        if ($agent === null) {
-            return self::$agents[$index] = new self(null, null, $apiKey, $downloadPdf, $responseType, $aggregator);
+        if ($singleton) {
+            $index = self::getHash($apiKey);
+            if (isset(self::$agents[$index])) {
+                $agent = self::$agents[$index];
+            } else {
+                $agent = new self(null, null, $apiKey, $downloadPdf, $responseType, $aggregator);
+                self::$agents[$index] = $agent;
+            }
         } else {
-            return $agent;
+            $agent =  new self(null, null, $apiKey, $downloadPdf, $responseType, $aggregator);
+            $agent->setSingleton($singleton);
         }
+        return $agent;
     }
 }
