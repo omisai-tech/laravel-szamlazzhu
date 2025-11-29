@@ -276,7 +276,7 @@ abstract class AbstractResponse
                 throw new SzamlaAgentException(SzamlaAgentException::RESPONSE_TYPE_NOT_EXISTS . $this->agent->getResponseType());
         }
 
-        $filename = SzamlaAgentUtil::getXmlFileName('response', $name . $postfix, $this->agent->getRequest()->getEntity());
+        $filename = SzamlaAgentUtil::getXmlFileName('response', $name . $postfix, $this->agent, $this->agent->getRequest()->getEntity());
         $realPath = sprintf('%s/response/%s', SzamlaAgent::XML_FILE_SAVE_PATH, $filename);
         $isXmlSaved = Storage::disk('payment')->put($realPath, $xml->saveXML());
         if ($isXmlSaved) {

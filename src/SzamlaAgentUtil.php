@@ -9,13 +9,16 @@ class SzamlaAgentUtil
     /**
      * @throws \ReflectionException
      */
-    public static function getXmlFileName(string $prefix, string $name, object $entity = null)
+    public static function getXmlFileName(string $prefix, string $name, SzamlaAgent $agent, object $entity)
     {
         if (!empty($name) && !empty($entity)) {
             $name .= '-' . (new \ReflectionClass($entity))->getShortName();
         }
 
+        $hash = $agent->getSingleton() ? '' : spl_object_hash($agent);
+
         return  $prefix . '-' . strtolower($name) . '-' . self::getDateTimeWithMilliseconds() . '.xml';
+        return $prefix . '-' . strtolower($name) . '-' . $hash . '-' . self::getDateTimeWithMilliseconds() . '.xml';
     }
 
     public static function getDateTimeWithMilliseconds(): string

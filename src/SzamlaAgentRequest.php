@@ -162,7 +162,7 @@ class SzamlaAgentRequest
     {
         $agent = $this->agent;
         $this->setXmlFileData($this->getType());
-        $this->setFileName(SzamlaAgentUtil::getXmlFileName('request', $this->getXmlName(), $this->getEntity()));
+        $this->setFileName(SzamlaAgentUtil::getXmlFileName('request', $this->getXmlName(), $agent, $this->getEntity()));
 
         Log::channel('szamlazzhu')->debug('Started to build the XML data.');
         $xmlArray = $this->getEntity()->buildXmlData($this);
@@ -172,7 +172,7 @@ class SzamlaAgentRequest
         try {
             $result = SzamlaAgentUtil::checkValidXml($xml->saveXML());
             if (!empty($result)) {
-                throw new SzamlaAgentException(SzamlaAgentException::XML_NOT_VALID." a {$result[0]->line}. sorban: {$result[0]->message}. ");
+                throw new SzamlaAgentException(SzamlaAgentException::XML_NOT_VALID . " a {$result[0]->line}. sorban: {$result[0]->message}. ");
             }
             $formatXml = SzamlaAgentUtil::formatXml($xml);
             $this->setXmlString($formatXml->saveXML());
@@ -189,7 +189,7 @@ class SzamlaAgentRequest
                 }
             } catch (\Exception $ex) {
                 Log::channel('szamlazzhu')->debug('XML', ['data' => print_r($xmlString, true)]);
-                throw new SzamlaAgentException(SzamlaAgentException::XML_DATA_BUILD_FAILED.":  {$e->getMessage()} ");
+                throw new SzamlaAgentException(SzamlaAgentException::XML_DATA_BUILD_FAILED . ":  {$e->getMessage()} ");
             }
         }
     }
@@ -342,7 +342,7 @@ class SzamlaAgentRequest
      */
     private function makeHttpRequest(): Response
     {
-         $client = Http::timeout($this->getRequestTimeout())
+        $client = Http::timeout($this->getRequestTimeout())
             ->withCookies(...$this->cookieHandler->getCookies())
             ->attach(
                 $this->getFieldName(),
@@ -364,7 +364,7 @@ class SzamlaAgentRequest
                 if (self::MAX_NUMBER_OF_ATTACHMENTS < ($key + 1)) {
                     break;
                 }
-                $client = $client->attach('attachfile'. $key, $attachment['content'], $attachment['name']);
+                $client = $client->attach('attachfile' . $key, $attachment['content'], $attachment['name']);
             }
         }
 
