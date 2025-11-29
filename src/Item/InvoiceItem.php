@@ -5,6 +5,7 @@ namespace Omisai\Szamlazzhu\Item;
 use Omisai\Szamlazzhu\HasXmlBuildInterface;
 use Omisai\Szamlazzhu\Ledger\InvoiceItemLedger;
 use Omisai\Szamlazzhu\SzamlaAgentException;
+use Omisai\Szamlazzhu\SzamlaAgentUtil;
 
 class InvoiceItem extends Item implements HasXmlBuildInterface
 {
@@ -25,7 +26,7 @@ class InvoiceItem extends Item implements HasXmlBuildInterface
         $data['mennyiseg'] = number_format($this->quantity, 2);
         $data['mennyisegiEgyseg'] = $this->quantityUnit;
         $data['nettoEgysegar'] = $this->netUnitPrice;
-        $data['afakulcs'] = $this->vat;
+        $data['afakulcs'] = SzamlaAgentUtil::dotCheck($this->vat);
         if (!empty($this->priceGapVatBase)) {
             $data['arresAfaAlap'] = $this->priceGapVatBase;
         }

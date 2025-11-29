@@ -12,15 +12,15 @@ class SzamlaAgentUtil
     public static function getXmlFileName(string $prefix, string $name, object $entity = null)
     {
         if (!empty($name) && !empty($entity)) {
-            $name .= '-'.(new \ReflectionClass($entity))->getShortName();
+            $name .= '-' . (new \ReflectionClass($entity))->getShortName();
         }
 
-        return  $prefix.'-'.strtolower($name).'-'.self::getDateTimeWithMilliseconds().'.xml';
+        return  $prefix . '-' . strtolower($name) . '-' . self::getDateTimeWithMilliseconds() . '.xml';
     }
 
     public static function getDateTimeWithMilliseconds(): string
     {
-        return date('Y-m-d_H:i:s').substr(microtime(false), 2, 5);
+        return date('Y-m-d_H:i:s') . substr(microtime(false), 2, 5);
     }
 
     public static function formatXml(\SimpleXMLElement $simpleXMLElement): \DOMDocument
@@ -114,15 +114,15 @@ class SzamlaAgentUtil
             case JSON_ERROR_SYNTAX:
                 $error = 'Syntax error, malformed JSON.';
                 break;
-                // PHP >= 5.3.3
+            // PHP >= 5.3.3
             case JSON_ERROR_UTF8:
                 $error = 'Malformed UTF-8 characters, possibly incorrectly encoded.';
                 break;
-                // PHP >= 5.5.0
+            // PHP >= 5.5.0
             case JSON_ERROR_RECURSION:
                 $error = 'One or more recursive references in the value to be encoded.';
                 break;
-                // PHP >= 5.5.0
+            // PHP >= 5.5.0
             case JSON_ERROR_INF_OR_NAN:
                 $error = 'One or more NAN or INF values in the value to be encoded.';
                 break;
@@ -139,5 +139,13 @@ class SzamlaAgentUtil
         }
 
         return $result;
+    }
+
+    public static function dotCheck($value)
+    {
+        if (strpos($value, ',') !== false) {
+            $value = str_replace(',', '.', $value);
+        }
+        return $value;
     }
 }
