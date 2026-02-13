@@ -26,6 +26,14 @@ enum Language: string
 
     case PL = 'pl';
 
+    case BG = 'bg';
+
+    case NL = 'nl';
+
+    case RU = 'ru';
+
+    case SI = 'si';
+
     public static function getDefault(): self
     {
         return self::HU;
