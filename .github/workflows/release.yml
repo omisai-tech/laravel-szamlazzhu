@@ -1,0 +1,82 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: "Version bump type"
+        required: true
+        default: "patch"
+        type: choice
+        options:
+          - major
+          - minor
+          - patch
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Determine new version
+        id: versioning
+        run: |
+          git fetch --tags
+          latest_tag=$(git tag -l --sort=-v:refname | head -n1)
+          if [ -z "$latest_tag" ]; then
+            latest_tag="v0.0.0"
+          fi
+          case "$latest_tag" in
+            v*) ;;
+            *) latest_tag="v$latest_tag" ;;
+          esac
+          echo "Latest tag: $latest_tag"
+          version=${latest_tag#v}
+          IFS='.' read -r major minor patch <<< "$version"
+          bump="${{ github.event.inputs.bump }}"
+          if [ -z "$major" ]; then major=0; fi
+          if [ -z "$minor" ]; then minor=0; fi
+          if [ -z "$patch" ]; then patch=0; fi
+          if [ "$bump" = "major" ]; then
+            major=$((major + 1))
+            minor=0
+            patch=0
+          elif [ "$bump" = "minor" ]; then
+            minor=$((minor + 1))
+            patch=0
+          else
+            patch=$((patch + 1))
+          fi
+          new_tag="v${major}.${minor}.${patch}"
+          echo "new_tag=$new_tag" >> $GITHUB_OUTPUT
+          echo "latest_tag=$latest_tag" >> $GITHUB_OUTPUT
+
+      - name: Generate changelog
+        id: changelog
+        run: |
+          git fetch --tags
+          PREV_TAG="${{ steps.versioning.outputs.latest_tag }}"
+          if [ -z "$PREV_TAG" ] || [ "$PREV_TAG" = "v0.0.0" ]; then
+            CHANGELOG=$(git log --pretty=format:"- %s (%h)" HEAD)
+          else
+            CHANGELOG=$(git log --pretty=format:"- %s (%h)" "$PREV_TAG..HEAD")
+          fi
+          echo "CHANGELOG<<EOF" >> $GITHUB_OUTPUT
+          echo "$CHANGELOG" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub release (auto notes)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create ${{ steps.versioning.outputs.new_tag }} \
+          --generate-notes \
+          --title "${{ steps.versioning.outputs.new_tag }}" \
+          --target master \
