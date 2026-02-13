@@ -29,7 +29,7 @@ describe('Currency Enum', function () {
 
     it('has all major currencies defined', function () {
         $currencies = Currency::cases();
-        $currencyValues = array_map(fn($c) => $c->value, $currencies);
+        $currencyValues = array_map(fn ($c) => $c->value, $currencies);
 
         expect($currencyValues)
             ->toContain('EUR')

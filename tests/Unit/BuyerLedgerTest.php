@@ -1,23 +1,23 @@
 <?php
 
-use Omisai\Szamlazzhu\BuyerLedger;
 use Carbon\Carbon;
+use Omisai\Szamlazzhu\BuyerLedger;
 
 describe('BuyerLedger', function () {
     it('can be instantiated', function () {
-        $ledger = new BuyerLedger();
+        $ledger = new BuyerLedger;
         expect($ledger)->toBeInstanceOf(BuyerLedger::class);
     });
 
     it('can set buyer id', function () {
-        $ledger = new BuyerLedger();
+        $ledger = new BuyerLedger;
         $result = $ledger->setBuyerId('BUYER123');
 
         expect($result)->toBeInstanceOf(BuyerLedger::class);
     });
 
     it('can set booking date', function () {
-        $ledger = new BuyerLedger();
+        $ledger = new BuyerLedger;
         $date = Carbon::create(2023, 6, 15);
         $result = $ledger->setBookingDate($date);
 
@@ -25,21 +25,21 @@ describe('BuyerLedger', function () {
     });
 
     it('can set buyer ledger number', function () {
-        $ledger = new BuyerLedger();
+        $ledger = new BuyerLedger;
         $result = $ledger->setBuyerLedgerNumber('LEDGER456');
 
         expect($result)->toBeInstanceOf(BuyerLedger::class);
     });
 
     it('can set continued fulfillment', function () {
-        $ledger = new BuyerLedger();
+        $ledger = new BuyerLedger;
         $result = $ledger->setContinuedFulfillment(true);
 
         expect($result)->toBeInstanceOf(BuyerLedger::class);
     });
 
     it('can set settlement period start', function () {
-        $ledger = new BuyerLedger();
+        $ledger = new BuyerLedger;
         $date = Carbon::create(2023, 1, 1);
         $result = $ledger->setSettlementPeriodStart($date);
 
@@ -47,7 +47,7 @@ describe('BuyerLedger', function () {
     });
 
     it('can set settlement period end', function () {
-        $ledger = new BuyerLedger();
+        $ledger = new BuyerLedger;
         $date = Carbon::create(2023, 12, 31);
         $result = $ledger->setSettlementPeriodEnd($date);
 
@@ -55,7 +55,7 @@ describe('BuyerLedger', function () {
     });
 
     it('returns fluent interface for all setters', function () {
-        $ledger = new BuyerLedger();
+        $ledger = new BuyerLedger;
 
         $result = $ledger
             ->setBuyerId('ID123')
@@ -69,7 +69,7 @@ describe('BuyerLedger', function () {
     });
 
     it('generates xml data with buyer id', function () {
-        $ledger = new BuyerLedger();
+        $ledger = new BuyerLedger;
         $ledger->setBuyerId('BUYER123')
             ->setContinuedFulfillment(false);
 
@@ -80,7 +80,7 @@ describe('BuyerLedger', function () {
     });
 
     it('generates xml data with booking date', function () {
-        $ledger = new BuyerLedger();
+        $ledger = new BuyerLedger;
         $ledger->setBookingDate(Carbon::create(2023, 6, 15))
             ->setContinuedFulfillment(false);
 
@@ -91,7 +91,7 @@ describe('BuyerLedger', function () {
     });
 
     it('generates xml data with settlement period', function () {
-        $ledger = new BuyerLedger();
+        $ledger = new BuyerLedger;
         $ledger->setSettlementPeriodStart(Carbon::create(2023, 1, 1))
             ->setSettlementPeriodEnd(Carbon::create(2023, 12, 31))
             ->setContinuedFulfillment(false);
@@ -104,7 +104,7 @@ describe('BuyerLedger', function () {
     });
 
     it('generates empty xml data when no properties set except continued fulfillment', function () {
-        $ledger = new BuyerLedger();
+        $ledger = new BuyerLedger;
         $ledger->setContinuedFulfillment(false);
 
         $data = $ledger->getXmlData();
@@ -114,7 +114,7 @@ describe('BuyerLedger', function () {
     });
 
     it('generates xml data with continued fulfillment set to true', function () {
-        $ledger = new BuyerLedger();
+        $ledger = new BuyerLedger;
         $ledger->setContinuedFulfillment(true);
 
         $data = $ledger->getXmlData();

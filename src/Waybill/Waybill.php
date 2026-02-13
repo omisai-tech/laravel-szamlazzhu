@@ -5,7 +5,6 @@ namespace Omisai\Szamlazzhu\Waybill;
 use Omisai\Szamlazzhu\HasXmlBuildWithRequestInterface;
 use Omisai\Szamlazzhu\SzamlaAgentException;
 use Omisai\Szamlazzhu\SzamlaAgentRequest;
-use Omisai\Szamlazzhu\SzamlaAgentUtil;
 
 /**
  * HU: Fuvarlevél
@@ -38,7 +37,7 @@ class Waybill implements HasXmlBuildWithRequestInterface
 
     protected string $comment;
 
-    protected function __construct(string $destination = '', string  $parcel = '', string  $barcode = '', string  $comment = '')
+    protected function __construct(string $destination = '', string $parcel = '', string $barcode = '', string $comment = '')
     {
         $this->setDestination($destination);
         $this->setParcel($parcel);

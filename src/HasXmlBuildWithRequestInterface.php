@@ -2,8 +2,6 @@
 
 namespace Omisai\Szamlazzhu;
 
-use Omisai\Szamlazzhu\SzamlaAgentRequest;
-
 interface HasXmlBuildWithRequestInterface
 {
     /**

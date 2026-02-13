@@ -1,7 +1,7 @@
 <?php
 
-use Omisai\Szamlazzhu\SzamlaAgent;
 use Omisai\Szamlazzhu\Response\AbstractResponse;
+use Omisai\Szamlazzhu\SzamlaAgent;
 
 describe('SzamlaAgent', function () {
     it('has correct API_ENDPOINT_URL constant', function () {

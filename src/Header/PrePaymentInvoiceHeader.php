@@ -3,7 +3,6 @@
 namespace Omisai\Szamlazzhu\Header;
 
 use Omisai\Szamlazzhu\Document\Invoice\Invoice;
-use Omisai\Szamlazzhu\Header\Type;
 use Omisai\Szamlazzhu\SzamlaAgentException;
 
 class PrePaymentInvoiceHeader extends InvoiceHeader

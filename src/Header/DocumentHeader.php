@@ -3,7 +3,6 @@
 namespace Omisai\Szamlazzhu\Header;
 
 use Omisai\Szamlazzhu\Currency;
-use Omisai\Szamlazzhu\Header\Type;
 use Omisai\Szamlazzhu\PaymentMethod;
 
 class DocumentHeader
@@ -17,13 +16,14 @@ class DocumentHeader
     protected string $prefix = '';
 
     protected string $comment;
+
     /**
      * HU: Devizás bizonylat esetén meg kell adni, hogy melyik bank árfolyamával
      * számoltuk a bizonylaton a forintos ÁFA értéket.
      * Ha 'MNB' és nincs megadva az árfolyam ($exchangeRate),
      * akkor az 'MNB' aktuális árfolyamát használjuk a bizonylat elkészítésekor.
      */
-    protected string $exchangeBank = "MNB";
+    protected string $exchangeBank = 'MNB';
 
     /**
      * HU: Ha nincs megadva vagy 0-t adunk meg az árfolyam ($exchangeRate) értékének
@@ -52,6 +52,7 @@ class DocumentHeader
 
         return $this;
     }
+
     public function setPaymentMethodByString(string $paymentMethod): self
     {
         $this->paymentMethod = PaymentMethod::tryFrom($paymentMethod);
@@ -101,51 +102,51 @@ class DocumentHeader
 
     public function isInvoice(): bool
     {
-        return Type::INVOICE === $this->type;
+        return $this->type === Type::INVOICE;
     }
 
     public function isReserveInvoice(): bool
     {
-        return Type::REVERSE_INVOICE === $this->type;
+        return $this->type === Type::REVERSE_INVOICE;
     }
 
     public function isNotReserveInvoice(): bool
     {
-        return Type::REVERSE_INVOICE !== $this->type;
+        return $this->type !== Type::REVERSE_INVOICE;
     }
 
     public function isPrePayment(): bool
     {
-        return Type::PREPAYMENT_INVOICE === $this->type;
+        return $this->type === Type::PREPAYMENT_INVOICE;
     }
 
     public function isFinal(): bool
     {
-        return Type::FINAL_INVOICE === $this->type;
+        return $this->type === Type::FINAL_INVOICE;
     }
 
     public function isCorrective(): bool
     {
-        return Type::CORRECTIVE_INVOICE === $this->type;
+        return $this->type === Type::CORRECTIVE_INVOICE;
     }
 
     public function isProforma(): bool
     {
-        return Type::PROFORMA_INVOICE === $this->type;
+        return $this->type === Type::PROFORMA_INVOICE;
     }
 
     public function isDeliveryNote(): bool
     {
-        return Type::DELIVERY_NOTE === $this->type;
+        return $this->type === Type::DELIVERY_NOTE;
     }
 
     public function isReceipt(): bool
     {
-        return Type::RECEIPT === $this->type;
+        return $this->type === Type::RECEIPT;
     }
 
     public function isReverseReceipt(): bool
     {
-        return Type::REVERSE_RECEIPT === $this->type;
+        return $this->type === Type::REVERSE_RECEIPT;
     }
 }

@@ -2,11 +2,9 @@
 
 namespace Omisai\Szamlazzhu;
 
-use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\File;
 
 class CookieHandler
 {

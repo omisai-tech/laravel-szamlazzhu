@@ -2,10 +2,10 @@
 
 namespace Omisai\Szamlazzhu\CreditNote;
 
+use Carbon\Carbon;
 use Omisai\Szamlazzhu\FieldsValidationTrait;
 use Omisai\Szamlazzhu\PaymentMethod;
 use Omisai\Szamlazzhu\SzamlaAgentException;
-use Carbon\Carbon;
 
 class InvoiceCreditNote extends CreditNote
 {

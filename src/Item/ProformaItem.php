@@ -2,6 +2,4 @@
 
 namespace Omisai\Szamlazzhu\Item;
 
-class ProformaItem extends InvoiceItem
-{
-}
+class ProformaItem extends InvoiceItem {}

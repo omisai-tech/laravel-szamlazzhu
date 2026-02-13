@@ -5,13 +5,13 @@ use Omisai\Szamlazzhu\Header\ProformaHeader;
 
 describe('Proforma Document', function () {
     it('can be instantiated', function () {
-        $proforma = new Proforma();
+        $proforma = new Proforma;
 
         expect($proforma)->toBeInstanceOf(Proforma::class);
     });
 
     it('has proforma header by default', function () {
-        $proforma = new Proforma();
+        $proforma = new Proforma;
 
         expect($proforma->getHeader())->toBeInstanceOf(ProformaHeader::class);
     });
@@ -22,13 +22,13 @@ describe('Proforma Document', function () {
     });
 
     it('header is proforma type', function () {
-        $proforma = new Proforma();
+        $proforma = new Proforma;
 
         expect($proforma->getHeader()->isProforma())->toBeTrue();
     });
 
     it('can set seller', function () {
-        $proforma = new Proforma();
+        $proforma = new Proforma;
         $seller = makeSeller();
         $result = $proforma->setSeller($seller);
 
@@ -36,7 +36,7 @@ describe('Proforma Document', function () {
     });
 
     it('can set buyer', function () {
-        $proforma = new Proforma();
+        $proforma = new Proforma;
         $buyer = makeBuyer();
         $result = $proforma->setBuyer($buyer);
 
@@ -44,7 +44,7 @@ describe('Proforma Document', function () {
     });
 
     it('can add items', function () {
-        $proforma = new Proforma();
+        $proforma = new Proforma;
         $item = makeInvoiceItem();
         $result = $proforma->addItem($item);
 

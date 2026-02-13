@@ -25,7 +25,7 @@ describe('Language Enum', function () {
 
     it('has all supported languages defined', function () {
         $languages = Language::cases();
-        $languageValues = array_map(fn($l) => $l->value, $languages);
+        $languageValues = array_map(fn ($l) => $l->value, $languages);
 
         expect($languageValues)
             ->toContain('hu')

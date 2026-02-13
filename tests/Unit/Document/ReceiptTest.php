@@ -1,16 +1,15 @@
 <?php
 
 use Omisai\Szamlazzhu\Buyer;
+use Omisai\Szamlazzhu\CreditNote\ReceiptCreditNote;
 use Omisai\Szamlazzhu\Document\Receipt\Receipt;
 use Omisai\Szamlazzhu\Header\ReceiptHeader;
-use Omisai\Szamlazzhu\Item\ReceiptItem;
-use Omisai\Szamlazzhu\Seller;
-use Omisai\Szamlazzhu\CreditNote\ReceiptCreditNote;
 use Omisai\Szamlazzhu\PaymentMethod;
+use Omisai\Szamlazzhu\Seller;
 
 describe('Receipt Document', function () {
     it('can be instantiated without receipt number', function () {
-        $receipt = new Receipt();
+        $receipt = new Receipt;
 
         expect($receipt)->toBeInstanceOf(Receipt::class);
     });
@@ -22,8 +21,8 @@ describe('Receipt Document', function () {
     });
 
     it('can get and set header', function () {
-        $receipt = new Receipt();
-        $header = new ReceiptHeader();
+        $receipt = new Receipt;
+        $header = new ReceiptHeader;
         $result = $receipt->setHeader($header);
 
         expect($result)->toBeInstanceOf(Receipt::class);
@@ -31,7 +30,7 @@ describe('Receipt Document', function () {
     });
 
     it('can get and set seller', function () {
-        $receipt = new Receipt();
+        $receipt = new Receipt;
         $seller = makeSeller();
         $result = $receipt->setSeller($seller);
 
@@ -40,7 +39,7 @@ describe('Receipt Document', function () {
     });
 
     it('can get and set buyer', function () {
-        $receipt = new Receipt();
+        $receipt = new Receipt;
         $buyer = makeBuyer();
         $result = $receipt->setBuyer($buyer);
 
@@ -49,7 +48,7 @@ describe('Receipt Document', function () {
     });
 
     it('can add item', function () {
-        $receipt = new Receipt();
+        $receipt = new Receipt;
         $item = makeReceiptItem();
         $receipt->addItem($item);
 
@@ -57,7 +56,7 @@ describe('Receipt Document', function () {
     });
 
     it('can set items', function () {
-        $receipt = new Receipt();
+        $receipt = new Receipt;
         $items = [makeReceiptItem(), makeReceiptItem('Another Book', 300.0)];
         $result = $receipt->setItems($items);
 
@@ -65,7 +64,7 @@ describe('Receipt Document', function () {
     });
 
     it('can add credit note', function () {
-        $receipt = new Receipt();
+        $receipt = new Receipt;
         $creditNote = new ReceiptCreditNote(PaymentMethod::PAYMENT_METHOD_CASH, 100.0, 'Payment');
         $result = $receipt->addCreditNote($creditNote);
 
@@ -73,7 +72,7 @@ describe('Receipt Document', function () {
     });
 
     it('can set credit notes', function () {
-        $receipt = new Receipt();
+        $receipt = new Receipt;
         $creditNotes = [
             new ReceiptCreditNote(PaymentMethod::PAYMENT_METHOD_CASH, 50.0),
             new ReceiptCreditNote(PaymentMethod::PAYMENT_METHOD_BANKCARD, 50.0),

@@ -75,9 +75,8 @@ abstract class AbstractResponse
         }
 
         if ($this->hasError()) {
-            throw new SzamlaAgentException(SzamlaAgentException::AGENT_ERROR . ": [{$this->errorCode}], {$this->errorMessage}");
+            throw new SzamlaAgentException(SzamlaAgentException::AGENT_ERROR.": [{$this->errorCode}], {$this->errorMessage}");
         }
-
 
         Log::channel('szamlazzhu')->debug('The Agent call succesfully ended.');
         if ($this->isTaxPayerXmlResponse()) {
@@ -104,7 +103,7 @@ abstract class AbstractResponse
                     if ($isSaved) {
                         Log::channel('szamlazzhu')->debug(SzamlaAgentException::PDF_FILE_SAVE_SUCCESS, ['path' => $filename]);
                     } else {
-                        $errorMessage = SzamlaAgentException::PDF_FILE_SAVE_FAILED . ': ' . SzamlaAgentException::FILE_CREATION_FAILED;
+                        $errorMessage = SzamlaAgentException::PDF_FILE_SAVE_FAILED.': '.SzamlaAgentException::FILE_CREATION_FAILED;
                         Log::channel('szamlazzhu')->debug($errorMessage);
                         throw new SzamlaAgentException($errorMessage);
                     }
@@ -147,17 +146,17 @@ abstract class AbstractResponse
 
     public function isAgentInvoiceResponse(): bool
     {
-        return Document::DOCUMENT_TYPE_INVOICE === $this->xmlSchemaType;
+        return $this->xmlSchemaType === Document::DOCUMENT_TYPE_INVOICE;
     }
 
     public function isAgentProformaResponse(): bool
     {
-        return Document::DOCUMENT_TYPE_PROFORMA === $this->xmlSchemaType;
+        return $this->xmlSchemaType === Document::DOCUMENT_TYPE_PROFORMA;
     }
 
     public function isAgentReceiptResponse(): bool
     {
-        return Document::DOCUMENT_TYPE_RECEIPT === $this->xmlSchemaType;
+        return $this->xmlSchemaType === Document::DOCUMENT_TYPE_RECEIPT;
     }
 
     public function isTaxPayerResponse(): bool
@@ -167,7 +166,7 @@ abstract class AbstractResponse
 
     protected function isXmlResponse(): bool
     {
-        return self::RESULT_AS_XML === $this->agent->getResponseType();
+        return $this->agent->getResponseType() === self::RESULT_AS_XML;
     }
 
     protected function buildResponseXmlData(): void
@@ -189,11 +188,11 @@ abstract class AbstractResponse
     public function isTaxPayerXmlResponse(): bool
     {
         $result = true;
-        if ('taxpayer' !== $this->xmlSchemaType) {
+        if ($this->xmlSchemaType !== 'taxpayer') {
             return false;
         }
 
-        if (self::RESULT_AS_TAXPAYER_XML !== $this->agent->getResponseType()) {
+        if ($this->agent->getResponseType() !== self::RESULT_AS_TAXPAYER_XML) {
             $result = false;
         }
 
@@ -246,7 +245,6 @@ abstract class AbstractResponse
         return json_decode($jsonString, true);
     }
 
-
     /**
      * @throws SzamlaAgentException
      * @throws \ReflectionException
@@ -274,10 +272,10 @@ abstract class AbstractResponse
                 $postfix = '-text';
                 break;
             default:
-                throw new SzamlaAgentException(SzamlaAgentException::RESPONSE_TYPE_NOT_EXISTS . $this->agent->getResponseType());
+                throw new SzamlaAgentException(SzamlaAgentException::RESPONSE_TYPE_NOT_EXISTS.$this->agent->getResponseType());
         }
 
-        $filename = SzamlaAgentUtil::getXmlFileName('response', $name . $postfix, $this->agent, $this->agent->getRequest()->getEntity());
+        $filename = SzamlaAgentUtil::getXmlFileName('response', $name.$postfix, $this->agent, $this->agent->getRequest()->getEntity());
         $realPath = sprintf('%s/response/%s', SzamlaAgent::XML_FILE_SAVE_PATH, $filename);
         $isXmlSaved = Storage::disk(config('szamlazzhu.xml.disk'))->put($realPath, $xml->saveXML());
         if ($isXmlSaved) {

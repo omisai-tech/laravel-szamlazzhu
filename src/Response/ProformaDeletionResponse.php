@@ -2,8 +2,6 @@
 
 namespace Omisai\Szamlazzhu\Response;
 
-use Omisai\Szamlazzhu\Response\AbstractResponse;
-
 class ProformaDeletionResponse extends AbstractResponse
 {
     protected string $proformaNumber;
@@ -12,7 +10,7 @@ class ProformaDeletionResponse extends AbstractResponse
 
     public function parseData()
     {
-        if ('array' !== gettype($this->getData()) || empty($this->getData()) || empty($this->getData()['headers'])) {
+        if (gettype($this->getData()) !== 'array' || empty($this->getData()) || empty($this->getData()['headers'])) {
             return;
         }
 

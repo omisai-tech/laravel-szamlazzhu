@@ -76,8 +76,8 @@ describe('SzamlaAgentUtil', function () {
         $xml = new \SimpleXMLElement('<root></root>');
         $data = [
             'level1' => [
-                'level2' => 'nestedValue'
-            ]
+                'level2' => 'nestedValue',
+            ],
         ];
 
         SzamlaAgentUtil::addChildArray($xml, 'parent', $data);

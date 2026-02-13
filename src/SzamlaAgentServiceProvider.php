@@ -14,7 +14,7 @@ class SzamlaAgentServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/szamlazzhu.php',
+            __DIR__.'/../config/szamlazzhu.php',
             'szamlazzhu'
         );
 
@@ -44,17 +44,17 @@ class SzamlaAgentServiceProvider extends ServiceProvider
 
     protected function offerPublishing(): void
     {
-        if (! $this->app->runningInConsole()) {
+        if (!$this->app->runningInConsole()) {
             return;
         }
 
-        if (! function_exists('config_path')) {
+        if (!function_exists('config_path')) {
             // function not available and 'publish' not relevant in Lumen
             return;
         }
 
         $this->publishes([
-            __DIR__ . '/../config/szamlazzhu.php' => config_path('szamlazzhu.php'),
+            __DIR__.'/../config/szamlazzhu.php' => config_path('szamlazzhu.php'),
         ], 'szamlazzhu-config');
     }
 }

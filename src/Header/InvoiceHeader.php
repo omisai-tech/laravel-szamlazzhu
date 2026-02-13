@@ -6,13 +6,12 @@ use Carbon\Carbon;
 use Omisai\Szamlazzhu\Document\Document;
 use Omisai\Szamlazzhu\Document\Invoice\Invoice;
 use Omisai\Szamlazzhu\FieldsValidationTrait;
-use Omisai\Szamlazzhu\PaymentMethod;
 use Omisai\Szamlazzhu\HasXmlBuildWithRequestInterface;
+use Omisai\Szamlazzhu\Language;
+use Omisai\Szamlazzhu\PaymentMethod;
 use Omisai\Szamlazzhu\SzamlaAgentException;
 use Omisai\Szamlazzhu\SzamlaAgentRequest;
 use Omisai\Szamlazzhu\SzamlaAgentUtil;
-use Omisai\Szamlazzhu\Header\Type;
-use Omisai\Szamlazzhu\Language;
 
 class InvoiceHeader extends DocumentHeader implements HasXmlBuildWithRequestInterface
 {
@@ -207,7 +206,7 @@ class InvoiceHeader extends DocumentHeader implements HasXmlBuildWithRequestInte
     {
         $this->fulfillment = $fulfillment;
 
-        return $this;;
+        return $this;
     }
 
     public function setPaymentDue(Carbon $paymentDue): self

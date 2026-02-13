@@ -4,7 +4,6 @@ namespace Omisai\Szamlazzhu\Waybill;
 
 use Omisai\Szamlazzhu\SzamlaAgentException;
 use Omisai\Szamlazzhu\SzamlaAgentRequest;
-use Omisai\Szamlazzhu\SzamlaAgentUtil;
 
 /**
  * HU: Transoflex fuvarlevél

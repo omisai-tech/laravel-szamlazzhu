@@ -17,7 +17,7 @@ uses(TestCase::class)->in(__DIR__);
 
 function skipIfConfigNotSet(string $key)
 {
-    if (null === config($key)) {
+    if (config($key) === null) {
         test()->markTestSkipped("Config key {$key} not set");
     }
 }

@@ -1,0 +1,123 @@
+name: Feature Request
+description: Suggest a new feature or enhancement
+title: "[FEATURE] "
+labels: ["enhancement", "triage"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Feature Request
+
+        Thank you for suggesting a new feature! Please fill out the information below to help us understand your request.
+
+        **Before submitting:**
+        - [ ] I have searched for existing feature requests to avoid duplicates
+        - [ ] This feature would benefit other users (not just personal use)
+        - [ ] I have checked if this aligns with the project's goals
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Feature Summary
+      description: Provide a brief, clear summary of the feature you want.
+      placeholder: "A short description of what you want to add or change"
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem/Use Case
+      description: Describe the problem this feature would solve or the use case it would enable.
+      placeholder: "What's the problem you're trying to solve? What's your use case?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: Describe your proposed solution or implementation approach.
+      placeholder: "How would you like this feature to work?"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Feature Category
+      description: What type of feature is this?
+      options:
+        - New Feature
+        - Feature Enhancement
+        - API Addition/Change
+        - Configuration Feature
+        - Developer Experience (DX) Improvement
+        - Performance Improvement
+        - Security Enhancement
+        - Documentation
+        - Other (please specify)
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternative Solutions
+      description: Have you considered any alternative approaches?
+      placeholder: "What other solutions have you considered?"
+
+  - type: textarea
+    id: implementation_notes
+    attributes:
+      label: Implementation Notes
+      description: Any technical details, considerations, or implementation suggestions?
+      placeholder: "Technical details, breaking changes, dependencies, etc."
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority/Scope
+      description: How important/urgent is this feature?
+      options:
+        - Nice to have
+        - Would be helpful
+        - Important for my workflow
+        - Critical/blocking my work
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: requirements
+    attributes:
+      label: Requirements Checklist
+      description: Does this feature meet our contribution requirements?
+      options:
+        - label: This feature would benefit multiple users (not just personal use)
+          required: true
+        - label: This aligns with the project's goals and scope
+          required: true
+        - label: I'm willing to help implement this (or at least test it)
+          required: false
+        - label: This doesn't introduce breaking changes without good justification
+          required: false
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: Additional Context
+      description: Add any other context, screenshots, or examples that would help understand this feature request.
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      description: Please confirm the following before submitting
+      options:
+        - label: I have read the [Contributing Guide](CONTRIBUTING.md)
+          required: true
+        - label: I have searched for existing feature requests
+          required: true
+        - label: I have included all requested information
+          required: true

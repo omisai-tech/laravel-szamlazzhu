@@ -25,6 +25,6 @@ class Proforma extends Invoice
      */
     public function __construct()
     {
-        $this->setHeader(new ProformaHeader());
+        $this->setHeader(new ProformaHeader);
     }
 }

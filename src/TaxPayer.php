@@ -2,7 +2,6 @@
 
 namespace Omisai\Szamlazzhu;
 
-use Omisai\Szamlazzhu\FieldsValidationTrait;
 /**
  * HU: Adózó (adóalany)
  */
@@ -54,7 +53,6 @@ class TaxPayer
 
         return $data;
     }
-
 
     protected function setRequiredFields(array $requiredFields)
     {

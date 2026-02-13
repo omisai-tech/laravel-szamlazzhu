@@ -5,11 +5,10 @@ namespace Omisai\Szamlazzhu\Header;
 use Carbon\Carbon;
 use Omisai\Szamlazzhu\Document\Document;
 use Omisai\Szamlazzhu\Document\Invoice\Invoice;
+use Omisai\Szamlazzhu\PaymentMethod;
 use Omisai\Szamlazzhu\SzamlaAgentException;
 use Omisai\Szamlazzhu\SzamlaAgentRequest;
 use Omisai\Szamlazzhu\SzamlaAgentUtil;
-use Omisai\Szamlazzhu\Header\Type;
-use Omisai\Szamlazzhu\PaymentMethod;
 
 /**
  * Sztornó számla fejléc
@@ -48,11 +47,10 @@ class ReverseInvoiceHeader extends InvoiceHeader
         $this->setPaymentDue(Carbon::now()->addDays(SzamlaAgentUtil::DEFAULT_ADDED_DAYS));
     }
 
-
     /**
      * @throws SzamlaAgentException
      */
-    public function buildXmlData(SzamlaAgentRequest $request = null): array
+    public function buildXmlData(?SzamlaAgentRequest $request = null): array
     {
         if (empty($request)) {
             throw new SzamlaAgentException(SzamlaAgentException::XML_DATA_NOT_AVAILABLE);

@@ -2,10 +2,6 @@
 
 namespace Omisai\Szamlazzhu\Header;
 
-use Omisai\Szamlazzhu\SzamlaAgentException;
-use Omisai\Szamlazzhu\SzamlaAgentUtil;
-use Omisai\Szamlazzhu\Header\Type;
-
 class ReverseReceiptHeader extends ReceiptHeader
 {
     protected array $requiredFields = ['receiptNumber'];
