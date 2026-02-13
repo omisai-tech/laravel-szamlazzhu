@@ -3,8 +3,6 @@
 namespace Omisai\Szamlazzhu\Response;
 
 use Illuminate\Support\Facades\Log;
-use Omisai\Szamlazzhu\SzamlaAgentUtil;
-use Omisai\Szamlazzhu\Response\AbstractResponse;
 use Omisai\Szamlazzhu\SzamlaAgentException;
 
 class InvoiceResponse extends AbstractResponse
@@ -29,7 +27,7 @@ class InvoiceResponse extends AbstractResponse
 
     protected function parseData()
     {
-        if('array' != gettype($this->getData()) || empty($this->getData()) || empty($this->getData()['result']['headers'])) {
+        if (gettype($this->getData()) != 'array' || empty($this->getData()) || empty($this->getData()['result']['headers'])) {
             return;
         }
 
@@ -133,7 +131,7 @@ class InvoiceResponse extends AbstractResponse
 
     public function hasInvoiceNotificationSendError(): bool
     {
-        if (self::INVOICE_NOTIFICATION_SEND_FAILED === $this->errorCode) {
+        if ($this->errorCode === self::INVOICE_NOTIFICATION_SEND_FAILED) {
             return true;
         }
 

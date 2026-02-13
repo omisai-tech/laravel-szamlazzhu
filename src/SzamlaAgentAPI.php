@@ -12,11 +12,11 @@ class SzamlaAgentAPI extends SzamlaAgent
     /**
      * Számla Agent API létrehozása
      *
-     * @param  string  $apiKey       Számla Agent kulcs
+     * @param  string  $apiKey  Számla Agent kulcs
      * @param  bool  $downloadPdf  szeretnénk-e letölteni a bizonylatot PDF formátumban
-     * @param  int  $responseType válasz típusa (szöveges vagy XML)
-     * @param  string  $aggregator   webáruházat futtató motor neve
-     * @param  bool  $singleton    singleton minta használata
+     * @param  int  $responseType  válasz típusa (szöveges vagy XML)
+     * @param  string  $aggregator  webáruházat futtató motor neve
+     * @param  bool  $singleton  singleton minta használata
      * @return SzamlaAgent
      *
      * @throws SzamlaAgentException
@@ -34,9 +34,10 @@ class SzamlaAgentAPI extends SzamlaAgent
                 self::$agents[$index] = $agent;
             }
         } else {
-            $agent =  new self(null, null, $apiKey, $downloadPdf, $responseType, $aggregator);
+            $agent = new self(null, null, $apiKey, $downloadPdf, $responseType, $aggregator);
             $agent->setSingleton($singleton);
         }
+
         return $agent;
     }
 }

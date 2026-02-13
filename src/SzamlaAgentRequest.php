@@ -2,14 +2,11 @@
 
 namespace Omisai\Szamlazzhu;
 
-use Carbon\Carbon;
-use GuzzleHttp\Client;
-use Omisai\Szamlazzhu\Document\Document;
-use Omisai\Szamlazzhu\Document\Invoice\Invoice;
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\Client\Response;
+use Omisai\Szamlazzhu\Document\Invoice\Invoice;
 
 class SzamlaAgentRequest
 {
@@ -135,7 +132,7 @@ class SzamlaAgentRequest
         $this->cookieHandler = $cookieHandler;
         $this->entity = $entity;
         $this->cData = true;
-        if (null === $agent->getRequestTimeout()) {
+        if ($agent->getRequestTimeout() === null) {
             $this->requestTimeout = self::REQUEST_TIMEOUT;
         } else {
             $this->requestTimeout = $agent->getRequestTimeout();
@@ -172,7 +169,7 @@ class SzamlaAgentRequest
         try {
             $result = SzamlaAgentUtil::checkValidXml($xml->saveXML());
             if (!empty($result)) {
-                throw new SzamlaAgentException(SzamlaAgentException::XML_NOT_VALID . " a {$result[0]->line}. sorban: {$result[0]->message}. ");
+                throw new SzamlaAgentException(SzamlaAgentException::XML_NOT_VALID." a {$result[0]->line}. sorban: {$result[0]->message}. ");
             }
             $formatXml = SzamlaAgentUtil::formatXml($xml);
             $this->setXmlString($formatXml->saveXML());
@@ -189,7 +186,7 @@ class SzamlaAgentRequest
                 }
             } catch (\Exception $ex) {
                 Log::channel('szamlazzhu')->debug('XML', ['data' => print_r($xmlString, true)]);
-                throw new SzamlaAgentException(SzamlaAgentException::XML_DATA_BUILD_FAILED . ":  {$e->getMessage()} ");
+                throw new SzamlaAgentException(SzamlaAgentException::XML_DATA_BUILD_FAILED.":  {$e->getMessage()} ");
             }
         }
     }
@@ -262,7 +259,7 @@ class SzamlaAgentRequest
                 $xmlDirectory = 'dijbekerodel';
                 break;
             default:
-                throw new SzamlaAgentException(SzamlaAgentException::REQUEST_TYPE_NOT_EXISTS . ": {$type}");
+                throw new SzamlaAgentException(SzamlaAgentException::REQUEST_TYPE_NOT_EXISTS.": {$type}");
         }
 
         $this->fieldName = $fieldName;
@@ -273,21 +270,21 @@ class SzamlaAgentRequest
     private function getXmlBase(): string
     {
         $xmlName = $this->getXmlName();
-        $queryData = '<?xml version="1.0" encoding="UTF-8"?>' . PHP_EOL;
-        $queryData .= '<' . $xmlName . ' xmlns="' . $this->getXmlNamespace($xmlName) . '" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="' . $this->getSchemaLocation($xmlName) . '">' . PHP_EOL;
-        $queryData .= '</' . $xmlName . '>' . self::CRLF;
+        $queryData = '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL;
+        $queryData .= '<'.$xmlName.' xmlns="'.$this->getXmlNamespace($xmlName).'" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="'.$this->getSchemaLocation($xmlName).'">'.PHP_EOL;
+        $queryData .= '</'.$xmlName.'>'.self::CRLF;
 
         return $queryData;
     }
 
     private function getXmlNamespace($xmlName): string
     {
-        return self::XML_BASE_URL . "{$xmlName}";
+        return self::XML_BASE_URL."{$xmlName}";
     }
 
     private function getSchemaLocation($xmlName): string
     {
-        return self::XML_BASE_URL . "szamla/{$xmlName} http://www.szamlazz.hu/szamla/docs/xsds/{$this->getXmlDirectory()}/{$xmlName}.xsd";
+        return self::XML_BASE_URL."szamla/{$xmlName} http://www.szamlazz.hu/szamla/docs/xsds/{$this->getXmlDirectory()}/{$xmlName}.xsd";
     }
 
     private function arrayToXML(array $xmlString, SimpleXMLExtended &$xmlFields): void
@@ -306,7 +303,7 @@ class SzamlaAgentRequest
             } else {
                 if (is_bool($value)) {
                     $value = ($value) ? 'true' : 'false';
-                } elseif (! $this->isCData()) {
+                } elseif (!$this->isCData()) {
                     $value = htmlspecialchars("$value");
                 }
 
@@ -359,7 +356,6 @@ class SzamlaAgentRequest
             ]);
         }
 
-
         $response = $client->post(SzamlaAgent::API_ENDPOINT_URL);
         if ($this->hasAttachments()) {
             $attachments = $this->getEntity()->getAttachments();
@@ -367,7 +363,7 @@ class SzamlaAgentRequest
                 if (self::MAX_NUMBER_OF_ATTACHMENTS < ($key + 1)) {
                     break;
                 }
-                $client = $client->attach('attachfile' . $key, $attachment['content'], $attachment['name']);
+                $client = $client->attach('attachfile'.$key, $attachment['content'], $attachment['name']);
             }
         }
 

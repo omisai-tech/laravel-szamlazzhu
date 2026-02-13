@@ -2,8 +2,8 @@
 
 namespace Omisai\Szamlazzhu\CreditNote;
 
-use Omisai\Szamlazzhu\PaymentMethod;
 use Carbon\Carbon;
+use Omisai\Szamlazzhu\PaymentMethod;
 
 /**
  * HU: Jóváírás
@@ -39,14 +39,14 @@ class CreditNote
         return $this;
     }
 
-    public function setAmount(float $amount):  self
+    public function setAmount(float $amount): self
     {
         $this->amount = (float) $amount;
 
         return $this;
     }
 
-    public function setDescription(string $description):  self
+    public function setDescription(string $description): self
     {
         $this->description = $description;
 

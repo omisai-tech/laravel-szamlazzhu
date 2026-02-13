@@ -141,8 +141,6 @@ class Item
      *
      * Példa konkrét ÁFA értékre:
      * 0,5,7,18,19,20,25,27
-     *
-     * @var string
      */
     protected string $vat = self::DEFAULT_VAT;
 

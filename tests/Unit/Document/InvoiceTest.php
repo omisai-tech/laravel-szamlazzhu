@@ -1,16 +1,13 @@
 <?php
 
 use Omisai\Szamlazzhu\Buyer;
-use Omisai\Szamlazzhu\CreditNote\InvoiceCreditNote;
 use Omisai\Szamlazzhu\Document\Invoice\Invoice;
 use Omisai\Szamlazzhu\Header\InvoiceHeader;
-use Omisai\Szamlazzhu\Item\InvoiceItem;
 use Omisai\Szamlazzhu\Seller;
-use Omisai\Szamlazzhu\Waybill\Waybill;
 
 describe('Invoice Document', function () {
     it('can be instantiated with default e-invoice type', function () {
-        $invoice = new Invoice();
+        $invoice = new Invoice;
 
         expect($invoice)->toBeInstanceOf(Invoice::class);
     });
@@ -28,7 +25,7 @@ describe('Invoice Document', function () {
     });
 
     it('can get and set header', function () {
-        $invoice = new Invoice();
+        $invoice = new Invoice;
         $header = new InvoiceHeader(Invoice::INVOICE_TYPE_E_INVOICE);
         $result = $invoice->setHeader($header);
 
@@ -37,7 +34,7 @@ describe('Invoice Document', function () {
     });
 
     it('can get and set seller', function () {
-        $invoice = new Invoice();
+        $invoice = new Invoice;
         $seller = makeSeller();
         $result = $invoice->setSeller($seller);
 
@@ -46,7 +43,7 @@ describe('Invoice Document', function () {
     });
 
     it('can get and set buyer', function () {
-        $invoice = new Invoice();
+        $invoice = new Invoice;
         $buyer = makeBuyer();
         $result = $invoice->setBuyer($buyer);
 
@@ -55,7 +52,7 @@ describe('Invoice Document', function () {
     });
 
     it('can add item', function () {
-        $invoice = new Invoice();
+        $invoice = new Invoice;
         $item = makeInvoiceItem();
         $result = $invoice->addItem($item);
 
@@ -63,7 +60,7 @@ describe('Invoice Document', function () {
     });
 
     it('can set items', function () {
-        $invoice = new Invoice();
+        $invoice = new Invoice;
         $items = [makeInvoiceItem(), makeInvoiceItem('Another Product', 200.0)];
         $result = $invoice->setItems($items);
 
@@ -71,7 +68,7 @@ describe('Invoice Document', function () {
     });
 
     it('can set additive', function () {
-        $invoice = new Invoice();
+        $invoice = new Invoice;
         $result = $invoice->setAdditive(false);
 
         expect($result)->toBeInstanceOf(Invoice::class);
@@ -79,7 +76,7 @@ describe('Invoice Document', function () {
     });
 
     it('is additive by default', function () {
-        $invoice = new Invoice();
+        $invoice = new Invoice;
 
         expect($invoice->isAdditive())->toBeTrue();
     });

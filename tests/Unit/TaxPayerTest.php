@@ -24,7 +24,7 @@ describe('TaxPayer', function () {
     });
 
     it('can set tax payer id', function () {
-        $taxPayer = new TaxPayer();
+        $taxPayer = new TaxPayer;
         $taxPayer->setTaxPayerId('12345678');
 
         // TaxPayerId is truncated to 8 characters
@@ -32,7 +32,7 @@ describe('TaxPayer', function () {
     });
 
     it('truncates tax payer id to 8 characters', function () {
-        $taxPayer = new TaxPayer();
+        $taxPayer = new TaxPayer;
         $taxPayer->setTaxPayerId('123456789012345');
 
         // The setTaxPayerId method should truncate to 8 chars
@@ -40,14 +40,14 @@ describe('TaxPayer', function () {
     });
 
     it('can set tax payer type', function () {
-        $taxPayer = new TaxPayer();
+        $taxPayer = new TaxPayer;
         $taxPayer->setTaxPayerType(TaxPayer::TAXPAYER_EU_ENTERPRISE);
 
         expect($taxPayer->getTaxPayerType())->toBe(TaxPayer::TAXPAYER_EU_ENTERPRISE);
     });
 
     it('returns default tax payer type', function () {
-        $taxPayer = new TaxPayer();
+        $taxPayer = new TaxPayer;
 
         expect($taxPayer->getDefault())->toBe(TaxPayer::TAXPAYER_WE_DONT_KNOW);
     });

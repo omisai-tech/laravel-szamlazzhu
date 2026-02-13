@@ -152,20 +152,20 @@ class Receipt extends Document implements HasXmlBuildWithRequestInterface
                 switch ($key) {
                     case 'beallitasok':
                         $value = $request->getAgent()->getSetting()->buildXmlData($request);
-                    break;
+                        break;
                     case 'fejlec':
                         $value = $this->header->buildXmlData($request);
-                    break;
+                        break;
                     case 'tetelek':
                         $value = $this->buildXmlItemsData();
-                    break;
+                        break;
                     case 'kifizetesek':
                         $value = (!empty($this->creditNotes)) ? $this->buildCreditsXmlData() : null;
-                    break;
+                        break;
                     case 'emailKuldes':
                         $emailSendingData = $this->buildXmlEmailSendingData();
                         $value = (!empty($emailSendingData)) ? $emailSendingData : null;
-                    break;
+                        break;
                     default:
                         throw new SzamlaAgentException(SzamlaAgentException::XML_KEY_NOT_EXISTS.": {$key}");
                 }
@@ -186,7 +186,7 @@ class Receipt extends Document implements HasXmlBuildWithRequestInterface
     {
         $data = [];
 
-        if (! empty($this->items)) {
+        if (!empty($this->items)) {
             foreach ($this->items as $key => $item) {
                 $data["item{$key}"] = $item->buildXmlData();
             }
@@ -201,7 +201,7 @@ class Receipt extends Document implements HasXmlBuildWithRequestInterface
     protected function buildCreditsXmlData(): array
     {
         $data = [];
-        if (! empty($this->creditNotes)) {
+        if (!empty($this->creditNotes)) {
             foreach ($this->creditNotes as $key => $note) {
                 $data["note{$key}"] = $note->buildXmlData();
             }

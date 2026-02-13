@@ -224,7 +224,7 @@ class Invoice extends Document implements HasXmlBuildWithRequestInterface
                 $data = $settings['beallitasok'];
                 break;
             default:
-                throw new SzamlaAgentException(SzamlaAgentException::XML_SCHEMA_TYPE_NOT_EXISTS . ": {$request->getXmlName()}.");
+                throw new SzamlaAgentException(SzamlaAgentException::XML_SCHEMA_TYPE_NOT_EXISTS.": {$request->getXmlName()}.");
         }
 
         return $data;
@@ -237,7 +237,7 @@ class Invoice extends Document implements HasXmlBuildWithRequestInterface
     {
         $data = [];
 
-        if (! empty($fields)) {
+        if (!empty($fields)) {
             foreach ($fields as $key) {
                 switch ($key) {
                     case 'beallitasok':
@@ -259,7 +259,7 @@ class Invoice extends Document implements HasXmlBuildWithRequestInterface
                         $value = (!empty($this->waybill)) ? $this->waybill->buildXmlData($request) : [];
                         break;
                     default:
-                        throw new SzamlaAgentException(SzamlaAgentException::XML_KEY_NOT_EXISTS . ": {$key}");
+                        throw new SzamlaAgentException(SzamlaAgentException::XML_KEY_NOT_EXISTS.": {$key}");
                 }
 
                 if (isset($value)) {
@@ -278,7 +278,7 @@ class Invoice extends Document implements HasXmlBuildWithRequestInterface
     {
         $data = [];
 
-        if (! empty($this->items)) {
+        if (!empty($this->items)) {
             foreach ($this->items as $key => $item) {
                 $data["item{$key}"] = $item->buildXmlData();
             }
@@ -293,7 +293,7 @@ class Invoice extends Document implements HasXmlBuildWithRequestInterface
     protected function buildCreditsXmlData(): array
     {
         $data = [];
-        if (! empty($this->getCreditNotes())) {
+        if (!empty($this->getCreditNotes())) {
             foreach ($this->getCreditNotes() as $key => $note) {
                 $data["note{$key}"] = $note->buildXmlData();
             }
@@ -319,7 +319,7 @@ class Invoice extends Document implements HasXmlBuildWithRequestInterface
      *
      * @var fileName format = fileName.extension
      */
-    public function addAttachment(string $fileName, string $fileContent = null, string $filePath = null): self
+    public function addAttachment(string $fileName, ?string $fileContent = null, ?string $filePath = null): self
     {
         if (count($this->attachments) >= self::INVOICE_ATTACHMENTS_LIMIT) {
             Log::channel('szamlazzhu')->error(sprintf('The file attachment failed: %s. The maximum number of attached file for an invoice is: %s.', $filePath, self::INVOICE_ATTACHMENTS_LIMIT));

@@ -4,7 +4,6 @@ namespace Omisai\Szamlazzhu\Ledger;
 
 use Omisai\Szamlazzhu\HasXmlBuildInterface;
 use Omisai\Szamlazzhu\SzamlaAgentException;
-use Omisai\Szamlazzhu\SzamlaAgentUtil;
 
 class ReceiptItemLedger extends ItemLedger implements HasXmlBuildInterface
 {

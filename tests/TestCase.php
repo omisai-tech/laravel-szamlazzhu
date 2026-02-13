@@ -15,6 +15,7 @@ abstract class TestCase extends OrchestraTestCase
             SzamlaAgentServiceProvider::class,
         ];
     }
+
     /**
      * Resolve application core environment variables implementation.
      *
@@ -24,7 +25,7 @@ abstract class TestCase extends OrchestraTestCase
     protected function resolveApplicationEnvironmentVariables($app)
     {
         if (property_exists($this, 'loadEnvironmentVariables') && $this->loadEnvironmentVariables === true) {
-            $app->useEnvironmentPath(__DIR__ . '/..');
+            $app->useEnvironmentPath(__DIR__.'/..');
             $app->make('Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables')->bootstrap($app);
         }
     }

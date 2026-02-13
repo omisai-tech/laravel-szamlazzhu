@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use Omisai\Szamlazzhu\Currency;
 use Omisai\Szamlazzhu\PaymentMethod;
 use Omisai\Szamlazzhu\SzamlaAgentUtil;
-use Omisai\Szamlazzhu\Response\AbstractResponse;
 
 class ReceiptResponse extends AbstractResponse
 {
@@ -36,11 +35,11 @@ class ReceiptResponse extends AbstractResponse
 
     protected function parseData()
     {
-        if ('array' !== gettype($this->getData()) || empty($this->getData())) {
+        if (gettype($this->getData()) !== 'array' || empty($this->getData())) {
             return;
         }
 
-        if (self::RESULT_AS_TEXT === $this->agent->getResponseType()) {
+        if ($this->agent->getResponseType() === self::RESULT_AS_TEXT) {
             $xmlData = new \SimpleXMLElement(base64_decode($this->getData()['result']['body']));
             $data = SzamlaAgentUtil::toArray($xmlData);
         } else {
@@ -167,7 +166,6 @@ class ReceiptResponse extends AbstractResponse
     {
         return $this->creditNotes;
     }
-
 
     public function getDocumentNumber(): string
     {

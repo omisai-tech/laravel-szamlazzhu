@@ -4,7 +4,6 @@ namespace Omisai\Szamlazzhu\Header;
 
 use Omisai\Szamlazzhu\SzamlaAgentException;
 use Omisai\Szamlazzhu\SzamlaAgentRequest;
-use Omisai\Szamlazzhu\Header\Type;
 
 class ProformaHeader extends InvoiceHeader
 {

@@ -1,87 +1,87 @@
 <?php
 
-use Omisai\Szamlazzhu\Item\Item;
 use Omisai\Szamlazzhu\Item\InvoiceItem;
+use Omisai\Szamlazzhu\Item\Item;
 use Omisai\Szamlazzhu\Ledger\InvoiceItemLedger;
 
 describe('InvoiceItem', function () {
     it('can be instantiated', function () {
-        $item = new InvoiceItem();
+        $item = new InvoiceItem;
         expect($item)->toBeInstanceOf(InvoiceItem::class);
     });
 
     it('can set name', function () {
-        $item = new InvoiceItem();
+        $item = new InvoiceItem;
         $result = $item->setName('Test Product');
 
         expect($result)->toBeInstanceOf(InvoiceItem::class);
     });
 
     it('can set id', function () {
-        $item = new InvoiceItem();
+        $item = new InvoiceItem;
         $result = $item->setId('PROD123');
 
         expect($result)->toBeInstanceOf(InvoiceItem::class);
     });
 
     it('can set quantity', function () {
-        $item = new InvoiceItem();
+        $item = new InvoiceItem;
         $result = $item->setQuantity(5.0);
 
         expect($result)->toBeInstanceOf(InvoiceItem::class);
     });
 
     it('can set quantity unit', function () {
-        $item = new InvoiceItem();
+        $item = new InvoiceItem;
         $result = $item->setQuantityUnit('pcs');
 
         expect($result)->toBeInstanceOf(InvoiceItem::class);
     });
 
     it('can set net unit price', function () {
-        $item = new InvoiceItem();
+        $item = new InvoiceItem;
         $result = $item->setNetUnitPrice(100.0);
 
         expect($result)->toBeInstanceOf(InvoiceItem::class);
     });
 
     it('can set vat', function () {
-        $item = new InvoiceItem();
+        $item = new InvoiceItem;
         $result = $item->setVat('27');
 
         expect($result)->toBeInstanceOf(InvoiceItem::class);
     });
 
     it('can set net price', function () {
-        $item = new InvoiceItem();
+        $item = new InvoiceItem;
         $result = $item->setNetPrice(500.0);
 
         expect($result)->toBeInstanceOf(InvoiceItem::class);
     });
 
     it('can set vat amount', function () {
-        $item = new InvoiceItem();
+        $item = new InvoiceItem;
         $result = $item->setVatAmount(135.0);
 
         expect($result)->toBeInstanceOf(InvoiceItem::class);
     });
 
     it('can set gross amount', function () {
-        $item = new InvoiceItem();
+        $item = new InvoiceItem;
         $result = $item->setGrossAmount(635.0);
 
         expect($result)->toBeInstanceOf(InvoiceItem::class);
     });
 
     it('can set comment', function () {
-        $item = new InvoiceItem();
+        $item = new InvoiceItem;
         $result = $item->setComment('Test comment');
 
         expect($result)->toBeInstanceOf(InvoiceItem::class);
     });
 
     it('can set ledger data', function () {
-        $item = new InvoiceItem();
+        $item = new InvoiceItem;
         $ledger = new InvoiceItemLedger('economic', 'vat', '123', '456');
         $result = $item->setLedgerData($ledger);
 
@@ -118,7 +118,7 @@ describe('InvoiceItem', function () {
     });
 
     it('builds xml data correctly', function () {
-        $item = new InvoiceItem();
+        $item = new InvoiceItem;
         $item->setName('Test Product');
         $item->setQuantity(2.0);
         $item->setQuantityUnit('pcs');
@@ -142,7 +142,7 @@ describe('InvoiceItem', function () {
     });
 
     it('includes comment in xml data when set', function () {
-        $item = new InvoiceItem();
+        $item = new InvoiceItem;
         $item->setName('Test Product');
         $item->setQuantity(1.0);
         $item->setQuantityUnit('pcs');
@@ -159,7 +159,7 @@ describe('InvoiceItem', function () {
     });
 
     it('includes id in xml data when set', function () {
-        $item = new InvoiceItem();
+        $item = new InvoiceItem;
         $item->setId('ITEM123');
         $item->setName('Test Product');
         $item->setQuantity(1.0);

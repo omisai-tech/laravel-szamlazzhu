@@ -16,8 +16,8 @@ use Omisai\Szamlazzhu\Document\Receipt\ReverseReceipt;
 use Omisai\Szamlazzhu\Header\DocumentHeader;
 use Omisai\Szamlazzhu\Response\AbstractResponse;
 use Omisai\Szamlazzhu\Response\InvoiceResponse;
-use Omisai\Szamlazzhu\Response\ReceiptResponse;
 use Omisai\Szamlazzhu\Response\ProformaDeletionResponse;
+use Omisai\Szamlazzhu\Response\ReceiptResponse;
 
 class SzamlaAgent
 {
@@ -31,7 +31,7 @@ class SzamlaAgent
 
     private SzamlaAgentRequest $request;
 
-    private  ?int $requestTimeout = null;
+    private ?int $requestTimeout = null;
 
     private AbstractResponse $response;
 
@@ -57,10 +57,10 @@ class SzamlaAgent
     protected function __construct(?string $username, ?string $password, ?string $apiKey, ?bool $downloadPdf, int $responseType = AbstractResponse::RESULT_AS_XML, string $aggregator = '')
     {
         $this->setting = new SzamlaAgentSetting($username, $password, $apiKey, $downloadPdf, SzamlaAgentSetting::DOWNLOAD_COPIES_COUNT, $responseType, $aggregator);
-        $this->cookieHandler = new CookieHandler();
+        $this->cookieHandler = new CookieHandler;
         Log::channel('szamlazzhu')->debug(sprintf('Számla Agent initialization is complete ($username: %s, apiKey: %s)', $username, $apiKey));
 
-        if (null === $downloadPdf) {
+        if ($downloadPdf === null) {
             $downloadPdf = config('szamlazzhu.pdf.file_save', false);
         }
 
@@ -110,7 +110,7 @@ class SzamlaAgent
     }
 
     /**
-     * @param  string  $instanceId : email, username or api key
+     * @param  string  $instanceId  : email, username or api key
      * @throws SzamlaAgentException
      */
     public static function get($instanceId): SzamlaAgent
@@ -154,7 +154,7 @@ class SzamlaAgent
             return new ReceiptResponse($this, $request->send());
         }
 
-        throw new SzamlaAgentException("Cannot process response.");
+        throw new SzamlaAgentException('Cannot process response.');
     }
 
     /**
@@ -250,7 +250,7 @@ class SzamlaAgent
      */
     public function getInvoiceData(string $data, int $type = Invoice::FROM_INVOICE_NUMBER, $downloadPdf = false): InvoiceResponse
     {
-        $invoice = new Invoice();
+        $invoice = new Invoice;
 
         if ($type == Invoice::FROM_INVOICE_NUMBER) {
             $invoice->getHeader()->setInvoiceNumber($data);
@@ -275,7 +275,7 @@ class SzamlaAgent
      */
     public function getInvoicePdf(string $data, int $type = Invoice::FROM_INVOICE_NUMBER): InvoiceResponse
     {
-        $invoice = new Invoice();
+        $invoice = new Invoice;
 
         if ($type == Invoice::FROM_INVOICE_NUMBER) {
             $invoice->getHeader()->setInvoiceNumber($data);
@@ -297,9 +297,6 @@ class SzamlaAgent
         return $this->generateDocument('requestInvoicePDF', $invoice);
     }
 
-    /**
-     * @return bool
-     */
     public function isExistsInvoiceByExternalId(string|int $invoiceExternalId): bool
     {
         try {
@@ -381,7 +378,7 @@ class SzamlaAgent
      */
     public function getDeleteProforma(string $data, int $type = Proforma::FROM_INVOICE_NUMBER): ProformaDeletionResponse
     {
-        $proforma = new Proforma();
+        $proforma = new Proforma;
 
         if ($type == Proforma::FROM_INVOICE_NUMBER) {
             $proforma->getHeader()->setInvoiceNumber($data);

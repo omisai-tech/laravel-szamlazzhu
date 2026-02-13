@@ -5,7 +5,6 @@ namespace Omisai\Szamlazzhu\Ledger;
 use Carbon\Carbon;
 use Omisai\Szamlazzhu\HasXmlBuildInterface;
 use Omisai\Szamlazzhu\SzamlaAgentException;
-use Omisai\Szamlazzhu\SzamlaAgentUtil;
 
 class InvoiceItemLedger extends ItemLedger implements HasXmlBuildInterface
 {

@@ -1,13 +1,13 @@
 <?php
 
-use \Omisai\Szamlazzhu\SzamlaAgent;
-use \Omisai\Szamlazzhu\Document\Invoice\Invoice;
+use Omisai\Szamlazzhu\Document\Invoice\Invoice;
 use Omisai\Szamlazzhu\Document\Invoice\PrePaymentInvoice;
 use Omisai\Szamlazzhu\Document\Receipt\Receipt;
+use Omisai\Szamlazzhu\SzamlaAgent;
 use Omisai\Szamlazzhu\SzamlaAgentException;
 
 it('creates a prepayment invoice', function () {
-    $agent = SzamlaAgent::createWithAPIkey(config('szamlazzhu.api_key'), false,);
+    $agent = SzamlaAgent::createWithAPIkey(config('szamlazzhu.api_key'), false);
     $invoiceHeader = makePrePaymentInvoiceHeader();
     $seller = makeSeller();
     $buyer = makeBuyer('Pre Smith');
@@ -24,7 +24,7 @@ it('creates a prepayment invoice', function () {
 })->skipIfConfigNotSet('szamlazzhu.api_key');
 
 it('creates an invoice', function () {
-    $agent = SzamlaAgent::createWithAPIkey(config('szamlazzhu.api_key'), false,);
+    $agent = SzamlaAgent::createWithAPIkey(config('szamlazzhu.api_key'), false);
     $invoiceHeader = makeInvoiceHeader();
     $seller = makeSeller();
     $buyer = makeBuyer();
@@ -41,11 +41,11 @@ it('creates an invoice', function () {
 })->skipIfConfigNotSet('szamlazzhu.api_key');
 
 it('creates a receipt', function () {
-    $agent = SzamlaAgent::createWithAPIkey(config('szamlazzhu.api_key'), false,);
+    $agent = SzamlaAgent::createWithAPIkey(config('szamlazzhu.api_key'), false);
     $receiptHeader = makeReceiptHeader();
     $seller = makeSeller();
     $receiptItem = makeReceiptItem();
-    $receipt = new Receipt();
+    $receipt = new Receipt;
     $receipt->setHeader($receiptHeader);
     $receipt->setSeller($seller);
     $receipt->setItems([$receiptItem]);

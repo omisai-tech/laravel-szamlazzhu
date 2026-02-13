@@ -2,8 +2,6 @@
 
 namespace Omisai\Szamlazzhu;
 
-use Omisai\Szamlazzhu\FieldsValidationTrait;
-
 class Seller
 {
     use FieldsValidationTrait;
@@ -40,7 +38,7 @@ class Seller
                 }
 
                 $emailData = $this->getXmlEmailData();
-                if (! empty($emailData)) {
+                if (!empty($emailData)) {
                     $data = array_merge($data, $emailData);
                 }
                 if (!empty($this->signatoryName)) {

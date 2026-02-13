@@ -1,7 +1,7 @@
 <?php
 
-use Omisai\Szamlazzhu\SzamlaAgentSetting;
 use Omisai\Szamlazzhu\Response\AbstractResponse;
+use Omisai\Szamlazzhu\SzamlaAgentSetting;
 
 describe('SzamlaAgentSetting', function () {
     it('can be instantiated with all parameters', function () {

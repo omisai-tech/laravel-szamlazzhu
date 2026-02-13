@@ -2,8 +2,6 @@
 
 namespace Omisai\Szamlazzhu;
 
-use Omisai\Szamlazzhu\FieldsValidationTrait;
-
 class Buyer
 {
     use FieldsValidationTrait;
@@ -28,7 +26,7 @@ class Buyer
 
     protected bool $sendEmail = true;
 
-    protected int $taxPayer; //TODO: Use the TaxPayer object instead
+    protected int $taxPayer; // TODO: Use the TaxPayer object instead
 
     protected string $taxNumber;
 

@@ -45,13 +45,13 @@ class SzamlaAgentSetting
     /**
      * Számla Agent beállítás létrehozása
      *
-     * @param  string  $username     szamlazz.hu fiók felhasználónév vagy e-mail cím
-     * @param  string  $password     szamlazz.hu fiók jelszava
-     * @param  string  $apiKey       SzámlaAgent kulcs
+     * @param  string  $username  szamlazz.hu fiók felhasználónév vagy e-mail cím
+     * @param  string  $password  szamlazz.hu fiók jelszava
+     * @param  string  $apiKey  SzámlaAgent kulcs
      * @param  bool  $downloadPdf  szeretnénk-e PDF formátumban is megkapni a bizonylatot
      * @param  int  $copiesCount  bizonylat másolatok száma, ha PDF letöltést választottuk
-     * @param  int  $responseType válasz típusa (szöveges vagy XML)
-     * @param  string  $aggregator   webáruházat futtató motor neve
+     * @param  int  $responseType  válasz típusa (szöveges vagy XML)
+     * @param  string  $aggregator  webáruházat futtató motor neve
      */
     public function __construct(?string $username = '', ?string $password = '', ?string $apiKey = '', bool $downloadPdf = true, int $copiesCount = self::DOWNLOAD_COPIES_COUNT, int $responseType = SzamlaAgentResponse::RESULT_AS_TEXT, string $aggregator = '')
     {
@@ -86,8 +86,6 @@ class SzamlaAgentSetting
 
     /**
      * Visszaadja a Számla Agent kéréshez használt kulcsot
-     *
-     * @return string
      */
     public function getApiKey(): ?string
     {
@@ -132,8 +130,6 @@ class SzamlaAgentSetting
      *
      * 1: RESULT_AS_TEXT - egyszerű szöveges válaszüzenetet vagy pdf-et ad vissza.
      * 2: RESULT_AS_XML  - xml válasz, ha kérted a pdf-et az base64 kódolással benne van az xml-ben.
-     *
-     * @param  int  $responseType
      */
     public function setResponseType(int $responseType)
     {
@@ -149,8 +145,6 @@ class SzamlaAgentSetting
      * Ha bérelhető webáruházat üzemeltetsz, beállítja a webáruházat futtató motor nevét.
      * Ha nem vagy benne biztos, akkor kérd ügyfélszolgálatunk segítségét (info@szamlazz.hu).
      * (pl. WooCommerce, OpenCart, PrestaShop, Shoprenter, Superwebáruház, Drupal invoice Agent, stb.)
-     *
-     * @param  string  $aggregator
      */
     public function setAggregator(string $aggregator)
     {

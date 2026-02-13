@@ -37,11 +37,11 @@ class ReceiptItem extends Item implements HasXmlBuildInterface
             $data['megjegyzes'] = $this->comment;
         }
 
-        if (null !== $this->ledgerData) {
+        if ($this->ledgerData !== null) {
             $data['fokonyv'] = $this->ledgerData->buildXmlData();
         }
 
-        if (null !== $this->dataDeletionCode) {
+        if ($this->dataDeletionCode !== null) {
             $data['torloKod'] = $this->dataDeletionCode;
         }
 

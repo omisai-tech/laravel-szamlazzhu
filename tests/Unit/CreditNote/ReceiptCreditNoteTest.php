@@ -5,7 +5,7 @@ use Omisai\Szamlazzhu\PaymentMethod;
 
 describe('ReceiptCreditNote', function () {
     it('can be instantiated with default values', function () {
-        $creditNote = new ReceiptCreditNote();
+        $creditNote = new ReceiptCreditNote;
 
         expect($creditNote)->toBeInstanceOf(ReceiptCreditNote::class);
     });
@@ -17,7 +17,7 @@ describe('ReceiptCreditNote', function () {
     });
 
     it('can set payment method', function () {
-        $creditNote = new ReceiptCreditNote();
+        $creditNote = new ReceiptCreditNote;
         $result = $creditNote->setPaymentMethod(PaymentMethod::PAYMENT_METHOD_BANKCARD);
 
         expect($result)->toBeInstanceOf(ReceiptCreditNote::class);
@@ -30,14 +30,14 @@ describe('ReceiptCreditNote', function () {
     });
 
     it('can set amount', function () {
-        $creditNote = new ReceiptCreditNote();
+        $creditNote = new ReceiptCreditNote;
         $result = $creditNote->setAmount(200.0);
 
         expect($result)->toBeInstanceOf(ReceiptCreditNote::class);
     });
 
     it('can set description', function () {
-        $creditNote = new ReceiptCreditNote();
+        $creditNote = new ReceiptCreditNote;
         $result = $creditNote->setDescription('Receipt payment');
 
         expect($result)->toBeInstanceOf(ReceiptCreditNote::class);
@@ -63,7 +63,7 @@ describe('ReceiptCreditNote', function () {
     });
 
     it('uses cash as default payment method', function () {
-        $creditNote = new ReceiptCreditNote();
+        $creditNote = new ReceiptCreditNote;
 
         expect($creditNote->getPaymentMethod())->toBe('készpénz');
     });

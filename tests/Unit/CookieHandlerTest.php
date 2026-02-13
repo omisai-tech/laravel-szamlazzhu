@@ -4,7 +4,7 @@ use Omisai\Szamlazzhu\CookieHandler;
 
 describe('CookieHandler', function () {
     it('can be instantiated with default mode', function () {
-        $handler = new CookieHandler();
+        $handler = new CookieHandler;
         expect($handler)->toBeInstanceOf(CookieHandler::class);
     });
 
@@ -36,7 +36,7 @@ describe('CookieHandler', function () {
     });
 
     it('can set cookie handle mode', function () {
-        $handler = new CookieHandler();
+        $handler = new CookieHandler;
         $result = $handler->setCookieHandleMode(CookieHandler::COOKIE_HANDLE_MODE_DATABASE);
 
         expect($result)->toBeInstanceOf(CookieHandler::class);
@@ -52,7 +52,7 @@ describe('CookieHandler', function () {
     });
 
     it('returns cookies array with domain', function () {
-        $handler = new CookieHandler();
+        $handler = new CookieHandler;
         $cookies = $handler->getCookies();
 
         expect($cookies)->toBeArray();

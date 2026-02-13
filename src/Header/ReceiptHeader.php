@@ -4,11 +4,10 @@ namespace Omisai\Szamlazzhu\Header;
 
 use Omisai\Szamlazzhu\Document\Document;
 use Omisai\Szamlazzhu\FieldsValidationTrait;
-use Omisai\Szamlazzhu\PaymentMethod;
 use Omisai\Szamlazzhu\HasXmlBuildWithRequestInterface;
+use Omisai\Szamlazzhu\PaymentMethod;
 use Omisai\Szamlazzhu\SzamlaAgentException;
 use Omisai\Szamlazzhu\SzamlaAgentRequest;
-use Omisai\Szamlazzhu\Header\Type;
 
 class ReceiptHeader extends DocumentHeader implements HasXmlBuildWithRequestInterface
 {
@@ -68,7 +67,7 @@ class ReceiptHeader extends DocumentHeader implements HasXmlBuildWithRequestInte
                 $data = $this->buildFieldsData($request, ['nyugtaszam']);
                 break;
             default:
-                throw new SzamlaAgentException(SzamlaAgentException::XML_SCHEMA_TYPE_NOT_EXISTS . ": {$request->getXmlName()}");
+                throw new SzamlaAgentException(SzamlaAgentException::XML_SCHEMA_TYPE_NOT_EXISTS.": {$request->getXmlName()}");
         }
 
         return $data;
@@ -81,7 +80,7 @@ class ReceiptHeader extends DocumentHeader implements HasXmlBuildWithRequestInte
     {
         $data = [];
 
-        if (empty($request) || ! empty($field)) {
+        if (empty($request) || !empty($field)) {
             throw new SzamlaAgentException(SzamlaAgentException::XML_DATA_NOT_AVAILABLE);
         }
 
@@ -118,7 +117,7 @@ class ReceiptHeader extends DocumentHeader implements HasXmlBuildWithRequestInte
                     $value = $this->receiptNumber;
                     break;
                 default:
-                    throw new SzamlaAgentException(SzamlaAgentException::XML_KEY_NOT_EXISTS . ": {$key}");
+                    throw new SzamlaAgentException(SzamlaAgentException::XML_KEY_NOT_EXISTS.": {$key}");
             }
 
             if (isset($value)) {

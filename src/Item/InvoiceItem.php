@@ -30,19 +30,19 @@ class InvoiceItem extends Item implements HasXmlBuildInterface
         if (!empty($this->priceGapVatBase)) {
             $data['arresAfaAlap'] = $this->priceGapVatBase;
         }
-        $data['nettoErtek'] = 0 == $this->netPrice ? number_format($this->netPrice, 2) : $this->netPrice;
-        $data['afaErtek'] = 0 == $this->vatAmount ? number_format($this->vatAmount, 2) : $this->vatAmount;
-        $data['bruttoErtek'] = 0 == $this->grossAmount ? number_format($this->grossAmount, 2) : $this->grossAmount;
+        $data['nettoErtek'] = $this->netPrice == 0 ? number_format($this->netPrice, 2) : $this->netPrice;
+        $data['afaErtek'] = $this->vatAmount == 0 ? number_format($this->vatAmount, 2) : $this->vatAmount;
+        $data['bruttoErtek'] = $this->grossAmount == 0 ? number_format($this->grossAmount, 2) : $this->grossAmount;
 
         if (!empty($this->comment)) {
             $data['megjegyzes'] = $this->comment;
         }
 
-        if (null !== $this->ledgerData) {
+        if ($this->ledgerData !== null) {
             $data['tetelFokonyv'] = $this->ledgerData->buildXmlData();
         }
 
-        if (null !== $this->dataDeletionCode) {
+        if ($this->dataDeletionCode !== null) {
             $data['torloKod'] = $this->dataDeletionCode;
         }
 

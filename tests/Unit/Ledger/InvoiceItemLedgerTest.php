@@ -5,7 +5,7 @@ use Omisai\Szamlazzhu\Ledger\InvoiceItemLedger;
 
 describe('InvoiceItemLedger', function () {
     it('can be instantiated with default values', function () {
-        $ledger = new InvoiceItemLedger();
+        $ledger = new InvoiceItemLedger;
 
         expect($ledger)->toBeInstanceOf(InvoiceItemLedger::class);
     });
@@ -17,21 +17,21 @@ describe('InvoiceItemLedger', function () {
     });
 
     it('can set economic event type', function () {
-        $ledger = new InvoiceItemLedger();
+        $ledger = new InvoiceItemLedger;
         $result = $ledger->setEconomicEventType('EconomicEvent');
 
         expect($result)->toBeInstanceOf(InvoiceItemLedger::class);
     });
 
     it('can set VAT economic event type', function () {
-        $ledger = new InvoiceItemLedger();
+        $ledger = new InvoiceItemLedger;
         $result = $ledger->setVatEconomicEventType('VATEvent');
 
         expect($result)->toBeInstanceOf(InvoiceItemLedger::class);
     });
 
     it('can set settlement period start', function () {
-        $ledger = new InvoiceItemLedger();
+        $ledger = new InvoiceItemLedger;
         $date = Carbon::create(2023, 1, 1);
         $result = $ledger->setSettlementPeriodStart($date);
 
@@ -39,7 +39,7 @@ describe('InvoiceItemLedger', function () {
     });
 
     it('can set settlement period end', function () {
-        $ledger = new InvoiceItemLedger();
+        $ledger = new InvoiceItemLedger;
         $date = Carbon::create(2023, 12, 31);
         $result = $ledger->setSettlementPeriodEnd($date);
 
@@ -83,7 +83,7 @@ describe('InvoiceItemLedger', function () {
     });
 
     it('builds xml data with settlement period', function () {
-        $ledger = new InvoiceItemLedger();
+        $ledger = new InvoiceItemLedger;
         $ledger->setSettlementPeriodStart(Carbon::create(2023, 1, 1));
         $ledger->setSettlementPeriodEnd(Carbon::create(2023, 12, 31));
 
@@ -95,7 +95,7 @@ describe('InvoiceItemLedger', function () {
     });
 
     it('builds empty xml data when no properties set', function () {
-        $ledger = new InvoiceItemLedger();
+        $ledger = new InvoiceItemLedger;
 
         $data = $ledger->buildXmlData();
 

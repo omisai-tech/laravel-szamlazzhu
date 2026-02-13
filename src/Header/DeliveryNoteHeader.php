@@ -2,7 +2,6 @@
 
 namespace Omisai\Szamlazzhu\Header;
 
-use Omisai\Szamlazzhu\Header\Type;
 use Omisai\Szamlazzhu\SzamlaAgentException;
 
 class DeliveryNoteHeader extends InvoiceHeader

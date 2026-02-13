@@ -15,6 +15,6 @@ class DeliveryNote extends Invoice
      */
     public function __construct()
     {
-        $this->setHeader(new DeliveryNoteHeader());
+        $this->setHeader(new DeliveryNoteHeader);
     }
 }

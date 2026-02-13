@@ -1,7 +1,7 @@
 <?php
 
-use Omisai\Szamlazzhu\Document\Document;
 use Omisai\Szamlazzhu\Currency;
+use Omisai\Szamlazzhu\Document\Document;
 use Omisai\Szamlazzhu\Language;
 
 describe('Document', function () {

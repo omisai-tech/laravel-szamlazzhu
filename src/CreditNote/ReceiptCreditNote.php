@@ -5,7 +5,6 @@ namespace Omisai\Szamlazzhu\CreditNote;
 use Omisai\Szamlazzhu\FieldsValidationTrait;
 use Omisai\Szamlazzhu\PaymentMethod;
 use Omisai\Szamlazzhu\SzamlaAgentException;
-use Omisai\Szamlazzhu\SzamlaAgentUtil;
 
 class ReceiptCreditNote extends CreditNote
 {
