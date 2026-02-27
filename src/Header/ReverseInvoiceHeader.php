@@ -61,10 +61,10 @@ class ReverseInvoiceHeader extends InvoiceHeader
         $data['szamlaszam'] = $this->getInvoiceNumber();
 
         if (!empty($this->issueDate)) {
-            $data['keltDatum'] = $this->issueDate;
+            $data['keltDatum'] = $this->issueDate->format('Y-m-d');
         }
         if (!empty($this->fulfillment)) {
-            $data['teljesitesDatum'] = $this->fulfillment;
+            $data['teljesitesDatum'] = $this->fulfillment->format('Y-m-d');
         }
         if (!empty($this->comment)) {
             $data['megjegyzes'] = $this->comment;
