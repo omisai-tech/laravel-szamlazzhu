@@ -25,8 +25,11 @@ abstract class TestCase extends OrchestraTestCase
     protected function resolveApplicationEnvironmentVariables($app)
     {
         if (property_exists($this, 'loadEnvironmentVariables') && $this->loadEnvironmentVariables === true) {
-            $app->useEnvironmentPath(__DIR__.'/..');
-            $app->make('Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables')->bootstrap($app);
+            $envPath = __DIR__.'/..';
+            if (file_exists($envPath.'/.env') || file_exists($envPath.'/.env.testing')) {
+                $app->useEnvironmentPath($envPath);
+                $app->make('Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables')->bootstrap($app);
+            }
         }
     }
 }
