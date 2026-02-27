@@ -38,10 +38,14 @@ describe('Language Enum', function () {
             ->toContain('fr')
             ->toContain('es')
             ->toContain('cz')
-            ->toContain('pl');
+            ->toContain('pl')
+            ->toContain('bg')
+            ->toContain('nl')
+            ->toContain('ru')
+            ->toContain('si');
     });
 
-    it('has exactly 11 languages', function () {
-        expect(Language::cases())->toHaveCount(11);
+    it('has exactly 15 languages', function () {
+        expect(Language::cases())->toHaveCount(15);
     });
 });
