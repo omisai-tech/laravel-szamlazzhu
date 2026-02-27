@@ -8,6 +8,7 @@ use Omisai\Szamlazzhu\Header\InvoiceHeader;
 use Omisai\Szamlazzhu\Header\PrePaymentInvoiceHeader;
 use Omisai\Szamlazzhu\Header\ProformaHeader;
 use Omisai\Szamlazzhu\Header\ReceiptHeader;
+use Omisai\Szamlazzhu\Header\ReverseInvoiceHeader;
 use Omisai\Szamlazzhu\Item\InvoiceItem;
 use Omisai\Szamlazzhu\Item\ReceiptItem;
 use Omisai\Szamlazzhu\Language;
@@ -52,6 +53,19 @@ function makePrePaymentInvoiceHeader()
     $header->setIssueDate(Carbon::now());
     $header->setFulfillment(Carbon::now());
     $header->setPaymentDue(Carbon::now()->addDays(SzamlaAgentUtil::DEFAULT_ADDED_DAYS));
+    $header->setPaymentMethod(PaymentMethod::PAYMENT_METHOD_BANKCARD);
+    $header->setCurrency(Currency::EUR);
+    $header->setLanguage(Language::EN);
+    $header->setExchangeBank('MNB');
+    $header->setPaid(true);
+
+    return $header;
+}
+
+function makeReverseInvoiceHeader($type = null)
+{
+    $header = new ReverseInvoiceHeader($type ?? Invoice::INVOICE_TYPE_E_INVOICE);
+    $header->setIssueDate(Carbon::now());
     $header->setPaymentMethod(PaymentMethod::PAYMENT_METHOD_BANKCARD);
     $header->setCurrency(Currency::EUR);
     $header->setLanguage(Language::EN);
