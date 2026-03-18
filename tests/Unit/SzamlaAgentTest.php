@@ -1,7 +1,9 @@
 <?php
 
+use Omisai\Szamlazzhu\CookieHandler;
 use Omisai\Szamlazzhu\Response\AbstractResponse;
 use Omisai\Szamlazzhu\SzamlaAgent;
+use Omisai\Szamlazzhu\SzamlaAgentSetting;
 
 describe('SzamlaAgent', function () {
     it('has correct API_ENDPOINT_URL constant', function () {
@@ -115,13 +117,13 @@ describe('SzamlaAgent', function () {
     it('can get setting', function () {
         $agent = SzamlaAgent::createWithAPIkey('test-api-key-abcdefghijklmnopqrstuvwx10', true);
 
-        expect($agent->getSetting())->toBeInstanceOf(\Omisai\Szamlazzhu\SzamlaAgentSetting::class);
+        expect($agent->getSetting())->toBeInstanceOf(SzamlaAgentSetting::class);
     });
 
     it('can get cookie handler', function () {
         $agent = SzamlaAgent::createWithAPIkey('test-api-key-abcdefghijklmnopqrstuvwx11', true);
 
-        expect($agent->getCookieHandler())->toBeInstanceOf(\Omisai\Szamlazzhu\CookieHandler::class);
+        expect($agent->getCookieHandler())->toBeInstanceOf(CookieHandler::class);
     });
 
     it('can get singleton status', function () {

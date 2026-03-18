@@ -15,17 +15,17 @@ describe('SzamlaAgentUtil', function () {
     });
 
     it('formats xml from SimpleXMLElement', function () {
-        $simpleXml = new \SimpleXMLElement('<root><child>value</child></root>');
+        $simpleXml = new SimpleXMLElement('<root><child>value</child></root>');
         $formatted = SzamlaAgentUtil::formatXml($simpleXml);
 
-        expect($formatted)->toBeInstanceOf(\DOMDocument::class);
+        expect($formatted)->toBeInstanceOf(DOMDocument::class);
     });
 
     it('formats response xml from string', function () {
         $xmlString = '<?xml version="1.0"?><root><child>value</child></root>';
         $formatted = SzamlaAgentUtil::formatResponseXml($xmlString);
 
-        expect($formatted)->toBeInstanceOf(\DOMDocument::class);
+        expect($formatted)->toBeInstanceOf(DOMDocument::class);
     });
 
     it('checks valid xml and returns empty array for valid xml', function () {
@@ -62,7 +62,7 @@ describe('SzamlaAgentUtil', function () {
     });
 
     it('adds child array to xml node', function () {
-        $xml = new \SimpleXMLElement('<root></root>');
+        $xml = new SimpleXMLElement('<root></root>');
         $data = ['child1' => 'value1', 'child2' => 'value2'];
 
         SzamlaAgentUtil::addChildArray($xml, 'parent', $data);
@@ -73,7 +73,7 @@ describe('SzamlaAgentUtil', function () {
     });
 
     it('adds nested child array to xml node', function () {
-        $xml = new \SimpleXMLElement('<root></root>');
+        $xml = new SimpleXMLElement('<root></root>');
         $data = [
             'level1' => [
                 'level2' => 'nestedValue',
@@ -86,10 +86,10 @@ describe('SzamlaAgentUtil', function () {
     });
 
     it('removes namespaces from xml', function () {
-        $xmlWithNamespace = new \SimpleXMLElement('<ns:root xmlns:ns="http://example.com"><ns:child>value</ns:child></ns:root>');
+        $xmlWithNamespace = new SimpleXMLElement('<ns:root xmlns:ns="http://example.com"><ns:child>value</ns:child></ns:root>');
         $cleanedXml = SzamlaAgentUtil::removeNamespaces($xmlWithNamespace);
 
-        expect($cleanedXml)->toBeInstanceOf(\SimpleXMLElement::class);
+        expect($cleanedXml)->toBeInstanceOf(SimpleXMLElement::class);
         expect((string) $cleanedXml->child)->toBe('value');
     });
 });

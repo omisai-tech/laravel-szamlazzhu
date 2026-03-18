@@ -7,7 +7,7 @@ describe('SzamlaAgentException', function () {
         $exception = new SzamlaAgentException('Test error');
 
         expect($exception)->toBeInstanceOf(SzamlaAgentException::class);
-        expect($exception)->toBeInstanceOf(\Exception::class);
+        expect($exception)->toBeInstanceOf(Exception::class);
     });
 
     it('has correct SYSTEM_DOWN constant', function () {

@@ -2,6 +2,7 @@
 
 namespace Omisai\Szamlazzhu\Tests;
 
+use Illuminate\Foundation\Application;
 use Omisai\Szamlazzhu\SzamlaAgentServiceProvider;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 
@@ -19,7 +20,7 @@ abstract class TestCase extends OrchestraTestCase
     /**
      * Resolve application core environment variables implementation.
      *
-     * @param  \Illuminate\Foundation\Application  $app
+     * @param  Application  $app
      * @return void
      */
     protected function resolveApplicationEnvironmentVariables($app)
