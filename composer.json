@@ -20,7 +20,7 @@
     ],
     "require": {
         "php": "^8.2",
-        "guzzlehttp/guzzle": "^7.5",
+        "illuminate/http": "^10.0|^11.0|^12.0",
         "illuminate/config": "^10|^11|^12",
         "illuminate/filesystem": "^10|^11|^12",
         "illuminate/log": "^10|^11|^12",
