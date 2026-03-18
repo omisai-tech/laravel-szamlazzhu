@@ -65,8 +65,8 @@
     },
     "scripts": {
         "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
-        "pint": "./vendor/laravel/pint/builds/pint",
-        "test:lint": "pint --test",
+        "lint": "pint --parallel",
+        "test:lint": "pint --parallel --test",
         "test:analyse": "./vendor/bin/phpstan analyse src tests",
         "test:unit": "./vendor/bin/pest --colors=always",
         "test:coverage": "./vendor/bin/pest --coverage",
