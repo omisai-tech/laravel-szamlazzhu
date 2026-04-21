@@ -71,6 +71,14 @@ describe('DocumentHeader', function () {
         expect($result)->toBeInstanceOf(InvoiceHeader::class);
     });
 
+    it('can set and get order number', function () {
+        $header = new InvoiceHeader;
+        $result = $header->setOrderNumber('ORDER-123');
+
+        expect($result)->toBeInstanceOf(InvoiceHeader::class);
+        expect($header->getOrderNumber())->toBe('ORDER-123');
+    });
+
     it('correctly identifies invoice type', function () {
         $header = new InvoiceHeader;
 
