@@ -34,6 +34,8 @@ class DocumentHeader
 
     protected array $requiredFields = [];
 
+    protected string $orderNumber = '';
+
     public function setType(Type $type): self
     {
         $this->type = $type;
@@ -98,6 +100,18 @@ class DocumentHeader
         $this->exchangeRate = (float) $exchangeRate;
 
         return $this;
+    }
+
+    public function setOrderNumber(string $orderNumber): self
+    {
+        $this->orderNumber = $orderNumber;
+
+        return $this;
+    }
+
+    public function getOrderNumber(): string
+    {
+        return $this->orderNumber;
     }
 
     public function isInvoice(): bool
