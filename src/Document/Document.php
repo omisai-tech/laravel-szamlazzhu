@@ -10,6 +10,15 @@ use Omisai\Szamlazzhu\Language;
  */
 class Document
 {
+    /** Lekérdezés számlaszám alapján */
+    const FROM_DOCUMENT_NUMBER = 1;
+
+    /** Lekérdezés rendelési szám alapján */
+    const FROM_ORDER_NUMBER = 2;
+
+    /** Számla lekérdezése külső számlaazonosító alapján */
+    const FROM_INVOICE_EXTERNAL_ID = 3;
+
     /**
      * HU: Normál számla
      */
