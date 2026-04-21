@@ -252,10 +252,12 @@ class SzamlaAgent
     {
         $invoice = new Invoice;
 
-        if ($type == Invoice::FROM_INVOICE_NUMBER) {
+        if ($type == Invoice::FROM_DOCUMENT_NUMBER) {
             $invoice->getHeader()->setInvoiceNumber($data);
-        } else {
+        } elseif ($type == Invoice::FROM_ORDER_NUMBER) {
             $invoice->getHeader()->setOrderNumber($data);
+        } else {
+            $this->setInvoiceExternalId($data);
         }
 
         if ($this->getResponseType() !== AbstractResponse::RESULT_AS_XML) {
