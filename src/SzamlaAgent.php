@@ -14,6 +14,7 @@ use Omisai\Szamlazzhu\Document\Proforma;
 use Omisai\Szamlazzhu\Document\Receipt\Receipt;
 use Omisai\Szamlazzhu\Document\Receipt\ReverseReceipt;
 use Omisai\Szamlazzhu\Header\DocumentHeader;
+use Omisai\Szamlazzhu\Header\ReceiptHeader;
 use Omisai\Szamlazzhu\Response\AbstractResponse;
 use Omisai\Szamlazzhu\Response\InvoiceResponse;
 use Omisai\Szamlazzhu\Response\ProformaDeletionResponse;
@@ -316,9 +317,18 @@ class SzamlaAgent
      * @throws SzamlaAgentException
      * @throws \Exception
      */
-    public function getReceiptData(string $receiptNumber): ReceiptResponse
+    public function getReceiptData(string $receiptNumber, int $type = Receipt::FROM_DOCUMENT_NUMBER): ReceiptResponse
     {
-        return $this->generateDocument('requestReceiptData', new Receipt($receiptNumber));
+        $receipt = new Receipt;
+        $receipt->setHeader(new ReceiptHeader);
+
+        if ($type == Receipt::FROM_DOCUMENT_NUMBER) {
+            $receipt->getHeader()->setReceiptNumber($receiptNumber);
+        } elseif ($type == Receipt::FROM_ORDER_NUMBER) {
+            $receipt->getHeader()->setOrderNumber($receiptNumber);
+        }
+
+        return $this->generateDocument('requestReceiptData', $receipt);
     }
 
     /**
