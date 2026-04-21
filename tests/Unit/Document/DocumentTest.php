@@ -66,4 +66,10 @@ describe('Document', function () {
         expect(Document::DOCUMENT_TYPE_RESERVE_RECEIPT)->toBe('reserveReceipt');
         expect(Document::DOCUMENT_TYPE_RESERVE_RECEIPT_CODE)->toBe('SN');
     });
+
+    it('has correct document query type constants', function () {
+        expect(Document::FROM_DOCUMENT_NUMBER)->toBe(1);
+        expect(Document::FROM_ORDER_NUMBER)->toBe(2);
+        expect(Document::FROM_INVOICE_EXTERNAL_ID)->toBe(3);
+    });
 });
