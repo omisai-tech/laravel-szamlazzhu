@@ -49,6 +49,7 @@ class SzamlaAgentUtil
 
     public static function checkValidXml($xmlContent): array
     {
+        libxml_clear_errors();
         libxml_use_internal_errors(true);
 
         $doc = new \DOMDocument('1.0', 'utf-8');
