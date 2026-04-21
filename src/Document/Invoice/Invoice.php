@@ -29,12 +29,6 @@ class Invoice extends Document implements HasXmlBuildWithRequestInterface
     /** HU: Számla lekérdezése számlaszám alapján */
     public const FROM_INVOICE_NUMBER = 1;
 
-    /** HU: Számla lekérdezése rendelési szám alapján */
-    public const FROM_ORDER_NUMBER = 2;
-
-    /** HU: Számla lekérdezése külső számlaazonosító alapján */
-    public const FROM_INVOICE_EXTERNAL_ID = 3;
-
     /**
      * HU: Jóváírások maximális száma
      * a számla kifizetettségének beállításakor

@@ -249,7 +249,7 @@ class SzamlaAgent
     /**
      * @throws SzamlaAgentException
      */
-    public function getInvoiceData(string $data, int $type = Invoice::FROM_INVOICE_NUMBER, $downloadPdf = false): InvoiceResponse
+    public function getInvoiceData(string $data, int $type = Invoice::FROM_DOCUMENT_NUMBER, $downloadPdf = false): InvoiceResponse
     {
         $invoice = new Invoice;
 
