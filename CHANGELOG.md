@@ -2,6 +2,15 @@
 
 All notable changes to `laravel-szamlazzhu` will be documented in this file.
 
+## [v1.12.0](https://github.com/omisai-tech/laravel-szamlazzhu/compare/v1.11.0...v1.12.0) - 2026-04-21
+
+* Supporting [2.12.2] Szamlazzhu API
+* Add orderNumber property with setter and getter to DocumentHeader class
+* Add FROM_DOCUMENT_NUMBER, FROM_ORDER_NUMBER, and FROM_INVOICE_EXTERNAL_ID constants to Document class
+* Update SzamlaAgent's getInvoiceData method to support new FROM_DOCUMENT_NUMBER, FROM_ORDER_NUMBER, and FROM_INVOICE_EXTERNAL_ID constants for invoice data retrieval
+* Update SzamlaAgent's getInvoiceData method to use Invoice::FROM_DOCUMENT_NUMBER as default type instead of Invoice::FROM_INVOICE_NUMBER
+* Update SzamlaAgent's getReceiptData method to handle new FROM_ORDER_NUMBER and FROM_ORDER_NUMBER types for receipt data retrieval
+
 ## [1.8.0](https://github.com/omisai-tech/laravel-szamlazzhu/compare/1.3.0...1.4.0) - 2025-11-29
 
 * Supporting [2.10.23] Szamlazzhu API
