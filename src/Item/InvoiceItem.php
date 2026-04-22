@@ -23,7 +23,7 @@ class InvoiceItem extends Item implements HasXmlBuildInterface
         if (!empty($this->id)) {
             $data['azonosito'] = $this->id;
         }
-        $data['mennyiseg'] = number_format($this->quantity, 2);
+        $data['mennyiseg'] = floatval($this->quantity);
         $data['mennyisegiEgyseg'] = $this->quantityUnit;
         $data['nettoEgysegar'] = $this->netUnitPrice;
         $data['afakulcs'] = SzamlaAgentUtil::dotCheck($this->vat);
