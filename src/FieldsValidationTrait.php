@@ -10,7 +10,7 @@ trait FieldsValidationTrait
     protected function validateFields(): void
     {
         if (!isset($this->requiredFields)) {
-            throw new SzamlaAgentException(sprintf('The %s::requiredFields property is not defined, but mandantory if %s::validateFields() used. ', self::class, FieldValidationTrait::class));
+            throw new SzamlaAgentException(sprintf('The %s::requiredFields property is not defined, but mandantory if %s::validateFields() used. ', self::class, FieldsValidationTrait::class));
         }
 
         foreach ($this->requiredFields as $field) {
