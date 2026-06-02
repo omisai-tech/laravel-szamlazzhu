@@ -109,6 +109,11 @@ class Item
     public const VAT_HO = 'HO';
 
     /**
+     * HU: Áfakulcs: 27% ÁFA érték
+     */
+    public const VAT_27 = '27';
+
+    /**
      * HU: Alapértelmezett ÁFA érték
      */
     public const DEFAULT_VAT = '27';
