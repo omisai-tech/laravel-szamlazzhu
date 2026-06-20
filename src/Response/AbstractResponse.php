@@ -224,7 +224,7 @@ abstract class AbstractResponse
      */
     protected function parseData() {}
 
-    protected function getData(): ?array
+    public function getData(): ?array
     {
         $rawData = [];
         if (!$this->isTaxPayerXmlResponse()) {
