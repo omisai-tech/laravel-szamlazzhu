@@ -17,7 +17,7 @@ class InvoiceHeader extends DocumentHeader implements HasXmlBuildWithRequestInte
 {
     use FieldsValidationTrait;
 
-    protected string $invoiceNumber;
+    protected string $invoiceNumber = '';
 
     /**
      * INVOICE_TYPE_P_INVOICE : papírszámla
@@ -33,15 +33,13 @@ class InvoiceHeader extends DocumentHeader implements HasXmlBuildWithRequestInte
 
     protected Carbon $paymentDue;
 
-    protected string $extraLogo;
+    protected string $extraLogo = '';
 
-    protected float $correctionToPay;
+    protected float $correctionToPay = 0.0;
 
-    protected string $correctivedNumber;
+    protected string $correctivedNumber = '';
 
-    protected string $orderNumber;
-
-    protected string $proformaNumber;
+    protected string $proformaNumber = '';
 
     protected bool $paid = false;
 
@@ -59,7 +57,7 @@ class InvoiceHeader extends DocumentHeader implements HasXmlBuildWithRequestInte
      */
     protected string $invoiceTemplate = Invoice::INVOICE_TEMPLATE_DEFAULT;
 
-    protected string $prePaymentInvoiceNumber;
+    protected string $prePaymentInvoiceNumber = '';
 
     protected bool $previewPdf = false;
 
