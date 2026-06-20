@@ -293,7 +293,7 @@ class SzamlaAgentSetting
                     throw new SzamlaAgentException(SzamlaAgentException::XML_KEY_NOT_EXISTS.": {$key}");
             }
 
-            if (isset($value)) {
+            if (isset($value) && $value !== '') {
                 $data[$key] = $value;
             }
         }
