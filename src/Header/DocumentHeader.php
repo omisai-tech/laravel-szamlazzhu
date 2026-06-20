@@ -15,7 +15,7 @@ class DocumentHeader
 
     protected string $prefix = '';
 
-    protected string $comment;
+    protected string $comment = '';
 
     /**
      * HU: Devizás bizonylat esetén meg kell adni, hogy melyik bank árfolyamával
@@ -30,7 +30,7 @@ class DocumentHeader
      * és a megadott pénznem ($currency) létezik az MNB adatbázisában,
      * akkor az MNB aktuális árfolyamát használjuk a számlakészítéskor.
      */
-    protected float $exchangeRate;
+    protected float $exchangeRate = 0.0;
 
     protected array $requiredFields = [];
 
