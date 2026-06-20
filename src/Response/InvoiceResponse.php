@@ -172,4 +172,9 @@ class InvoiceResponse extends AbstractResponse
     {
         return $this->invoiceNumber;
     }
+
+    public function getInvoiceIdentifier(): int
+    {
+        return $this->invoiceIdentifier;
+    }
 }
