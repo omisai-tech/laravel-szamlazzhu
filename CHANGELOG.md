@@ -2,6 +2,13 @@
 
 All notable changes to `laravel-szamlazzhu` will be documented in this file.
 
+## [v1.13.0] - 2026-06-20
+
+* Fixed "Typed property ...::$orderNumber must not be accessed before initialization" fatal error (and similar for other header properties) when using `SzamlaAgent::getInvoiceData()` / `getInvoicePdf()` or data lookup flows with bare `new Invoice()`
+* Initialize all typed properties in `InvoiceHeader` (and relevant ones in `DocumentHeader`) with safe defaults (`''`, `0.0`, `false` etc.) to satisfy PHP 8+ typed property rules
+* Update `SzamlaAgentSetting::buildFieldsData` for request XML to skip empty string values (prevents emitting empty `<rendelesSzam>`, `<szamlaszam>` etc. on fetch operations)
+* Minor related cleanups in other `...Header` classes for consistency
+
 ## [v1.12.0](https://github.com/omisai-tech/laravel-szamlazzhu/compare/v1.11.0...v1.12.0) - 2026-04-21
 
 * Supporting [2.12.2] Szamlazzhu API
